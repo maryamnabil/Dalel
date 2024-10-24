@@ -1,0 +1,135 @@
+<app-table-filters
+  pageTitle="{{ groupName }}"
+  [showAdditionalButton]="false"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  [showAddGroupButton]="true"
+  (AddGroupClicked)="AddPaymentProblem()"
+  AccountingButtonText="{{ 'PAYMENT_PROBLEM' | translate }}"
+  ExportToBankText="{{ 'PAY_ALL' | translate }}"
+  [showExportToBank]="true"
+  (ExportToBankClicked)="onPayAll()"
+  [showAccountingDropDown]="true"
+  (SelectAccountStatus)="OnAccountStatus($event)"
+>
+</app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="selectAll">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          #selectAllCheckbox
+          [disabled]="allItemsPaid"
+          (change)="selectAllRows(selectAllCheckbox.checked)"
+        ></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-checkbox
+          [checked]="selectAllCheckbox.checked && !element.isPaid_FromAdmin"
+          [disabled]="element.isPaid_FromAdmin"
+          (change)="
+            selectRow($event, element.termId, selectAllCheckbox.checked)
+          "
+        ></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Payment ID Column -->
+    <ng-container matColumnDef="paymentId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        # {{ "PAYMENT_ID" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.termId }}</mat-cell>
+    </ng-container>
+
+    <!-- Created Date Column -->
+    <ng-container matColumnDef="createdDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "CREATED_DATE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.createdDate }}</mat-cell>
+    </ng-container>
+
+    <!-- Company Name Column -->
+    <ng-container matColumnDef="companyName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "COMPANY_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.company_Name }}</mat-cell>
+    </ng-container>
+
+    <!-- Vendor Name Column -->
+    <ng-container matColumnDef="vendorName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "VENDOR_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.vendor_Name }}</mat-cell>
+    </ng-container>
+
+    <!-- Vendor Phone Column -->
+    <ng-container matColumnDef="vendorPhone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "VENDOR_PHONE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.vendor_Phone }}</mat-cell>
+    </ng-container>
+
+    <!-- Commission Column -->
+    <ng-container matColumnDef="commission">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "COMMISSION" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.commission }}</mat-cell>
+    </ng-container>
+
+    <!-- Total Price Column -->
+    <ng-container matColumnDef="totalPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "TOTAL_PRICE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.totalPrice }}</mat-cell>
+    </ng-container>
+
+    <!-- Problem Column -->
+    <ng-container matColumnDef="problem">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PROBLEM" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.problem }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PAYMENT_STATUS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span
+          class="status"
+          [ngClass]="element.isPaid ? 'active-status' : 'inactive-status'"
+        >
+          {{ (element.isPaid ? "PAID" : "NOT_PAID") | translate }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Define Header Row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <!-- Define Data Rows -->
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  ></mat-paginator>
+</div>

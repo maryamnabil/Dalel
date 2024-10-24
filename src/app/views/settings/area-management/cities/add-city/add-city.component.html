@@ -1,0 +1,22 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'ADD_CITY_TITLE' | translate }}"
+    backwardLink="/admin/settings/area-management"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="cityForm">
+      <app-city-form
+        [cityForm]="cityForm"
+        (updateForm)="updateForm($event)"
+        [formSubmitted]="formSubmitted"
+      ></app-city-form>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'ADD' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

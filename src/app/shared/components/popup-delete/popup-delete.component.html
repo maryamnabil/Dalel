@@ -1,0 +1,14 @@
+<div class="popup text-center">
+  <mat-dialog-content class="p-0">
+    <strong class="text-danger mt-2">{{ translatePopup(data.title) }}</strong>
+    <p class="my-3">{{ translatePopup(data.message) }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-center p-0">
+    <button class="btn btn-danger" (click)="onConfirmClick()">
+      {{ translatePopup(data.confirmButton) }}
+    </button>
+    <button class="btn btn-dark" (click)="onCancelClick()">
+      {{ translatePopup(data.cancelButton) }}
+    </button>
+  </mat-dialog-actions>
+</div>

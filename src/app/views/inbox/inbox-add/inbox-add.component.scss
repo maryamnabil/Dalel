@@ -1,0 +1,28 @@
+:host ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
+    background-color: #262A2F !important;
+    border: 1px solid white;
+    color: white;
+  }
+  
+  :host ::ng-deep .mat-mdc-form-field:not(.mat-form-field-disabled) .mat-mdc-floating-label.mdc-floating-label {
+    color: white !important; ; 
+  }
+  :host ::ng-deep .mat-mdc-select-panel-above div.mat-mdc-select-panel {
+   
+    background-color: #262A2F !important;
+  }
+  
+ .mat-mdc-select-value-text {
+    color: white;
+  
+  }
+
+
+.btn {
+    font-size: 12px;
+    font-family: "Montserrat", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    line-height: 15px;
+    padding: 11px 16px;
+    margin: 10px;
+}

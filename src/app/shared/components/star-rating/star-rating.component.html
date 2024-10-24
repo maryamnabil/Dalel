@@ -1,0 +1,12 @@
+<div class="star-rating d-flex align-items-center">
+  <span class="rating" style="font-size: 14px">
+    {{ rating }}
+  </span>
+  <div class="d-flex align-items-center gap-1 fs-6 mx-2">
+    <span
+      class="text-primary"
+      *ngFor="let index of [0, 1, 2, 3, 4]"
+      [class]="getStarIcon(index)"
+    ></span>
+  </div>
+</div>

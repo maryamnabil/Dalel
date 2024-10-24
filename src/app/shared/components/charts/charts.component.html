@@ -1,0 +1,12 @@
+<h5 class="mb-3">{{ title }}</h5>
+<div class="mb-3">
+  <app-date-filter
+    (dateRangeChanged)="
+      onDateRangeFilterApplied({
+        fromDate: $event.startDate,
+        toDate: $event.endDate
+      })
+    "
+  ></app-date-filter>
+</div>
+<canvas [id]="id"></canvas>

@@ -1,0 +1,14 @@
+<div class="popup text-center">
+  <mat-dialog-content class="p-0">
+    <div class="d-flex flex-column align-items-center">
+      <img src="../assets/images/icons/done.svg" width="41" alt="Done icon" />
+      <ng-container *ngIf="data.title">
+        <strong class="text-success mt-2">{{ translatePopup(data.title) }}!</strong>
+      </ng-container>
+    </div>
+    <p class="my-3">{{ translatePopup(data.message) }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-center p-0">
+    <button (click)="closeDialog()" class="btn btn-success">{{ translatePopup(data.button) }}</button>
+  </mat-dialog-actions>
+</div>

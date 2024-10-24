@@ -1,0 +1,10 @@
+
+/* Tables Styles */
+.table-container {
+  mat-table {
+    mat-cell,
+    mat-header-cell {
+      white-space: normal;
+    }
+  }
+}

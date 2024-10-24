@@ -1,0 +1,22 @@
+@import "../../../../../assets/variables.scss";
+
+.graph-block {
+  @include border-radius (4px);
+  background: $bg-light;
+  box-shadow: 0px 20px 60px 0px rgba(18, 20, 21, 0.30);
+  padding: 20px 30px;
+  padding-bottom: 60px;
+
+  .filter-wrapper {
+    border-bottom: 1px solid #2F343A;
+    margin-left: -30px;
+    margin-right: -30px;
+    padding: 0 30px;
+    padding-bottom: $spacing;
+    h3 {
+      color: $white;
+      font-size: $font-xl;
+      margin-bottom: $spacing;
+    }
+  }
+}

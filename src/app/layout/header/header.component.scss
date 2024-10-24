@@ -1,0 +1,99 @@
+@import "../../../assets/variables.scss";
+
+:host {
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: $bg-dark;
+  }
+
+  .header-left {
+    .menu-toggle-button {
+      margin-right: $spacing;
+      height: 24px;
+      color: #C2D3F5;
+      outline: none;
+      background: transparent;
+      border: none;
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .header-right {
+    .header-icons {
+      margin: 0 $spacing;
+      a , .language-switcher {
+        padding: 0 10px;
+      }
+    }
+
+    .language-switcher {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      box-shadow: none;
+      border: none;
+    }
+  }
+
+  .user-card {
+    display: flex;
+    align-items: center;
+    background: $bg-light;
+    padding: 12px 20px;
+    .user-photo {
+      margin-right: $spacing;
+      img {
+
+        width: $spacing*2;
+        height: $spacing*2;
+        border-radius: 50%;
+      }
+    }
+
+    .user-details {
+      flex-grow: 1;
+      color: $white;
+      font-family: $body-font-secondary;
+      font-size: $font-md;
+      font-weight: $font-reg;
+      line-height: 20px;
+    }
+  }
+
+}
+
+/* ::ng-deep {
+  .mat-mdc-menu-content {
+    width: 162px !important;
+  }
+} */
+
+
+/* Arabic Styles */
+body.arabic {
+  :host {
+    .header-left {
+      .menu-toggle-button {
+        margin-right: 0;
+        margin-left: $spacing;
+      }
+    }
+
+    .user-card {
+      .user-photo {
+        margin-right: 0;
+        margin-left: $spacing;
+      }
+      .user-details {
+        font-family: $body-font-ar;
+      }
+    }
+  }
+}
+
+
+

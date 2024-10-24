@@ -1,0 +1,56 @@
+<app-table-filters
+  pageTitle="{{ 'NEWS' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="true"
+  buttonText="{{ 'ADD_NEWS' | translate }}"
+  buttonLink="/admin/settings/news/news-add"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+  <div class="d-flex align-items-center gap-2" dropDownFilter>
+    <span class="filter-label">{{
+      "FILTER_BY_NEWS_CATEGORY" | translate
+    }}</span>
+    <div
+      style="
+        min-width: 185px;
+        max-width: 185px;
+        position: relative;
+        z-index: 9999;
+      "
+    >
+      <ng-select
+        class="dark-theme"
+        [placeholder]="'NEWS_CATEGORY' | translate"
+        [searchable]="true"
+        bindValue="id"
+        bindLabel="name"
+        [appendTo]="'body'"
+        [(ngModel)]="categoryId"
+        (ngModelChange)="loadData()"
+        [items]="categories | translateOptions | async"
+        [notFoundText]="'NO_ITEMS' | translate"
+      >
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          {{ item | localizedName : "name" | async }}
+        </ng-template>
+      </ng-select>
+    </div>
+  </div>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [viewDetailsUrl]="'/admin/settings/news/news-detail'"
+  [editUrl]="'/admin/settings/news/news-edit'"
+  (onPageChangeEvt)="onPageChanged($event)"
+  (onDeleteEvt)="delete($event)"
+>
+</app-table>

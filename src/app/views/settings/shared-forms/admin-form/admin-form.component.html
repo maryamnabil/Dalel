@@ -1,0 +1,61 @@
+<div [formGroup]="adminForm">
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="roleName" class="form-label">{{ 'ROLE_NAME' | translate }} *</label>
+      <input type="text" class="form-control" id="roleName" formControlName="roleName" name="roleName" placeholder="{{ 'ROLE_NAME' | translate }} *" required>
+      <div class="error-messages" *ngIf="formSubmitted && adminForm.get('roleName')?.hasError('required')">
+        {{'NAME_REQUIRED' | translate}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 mb-5 form-group">
+    <label for="adminName" class="form-label">{{ 'ADMIN_NAME' | translate }} *</label>
+    <input type="text" class="form-control" id="adminName" formControlName="adminName" name="adminName" placeholder="{{ 'ADMIN_NAME' | translate }} *" required>
+  </div>
+  <div class="col-4 mb-5 form-group">
+    <label for="adminEmail" class="form-label">{{ 'ADMIN_EMAIL' | translate }} *</label>
+    <input type="email" class="form-control" id="adminEmail" formControlName="adminEmail" name="adminEmail" placeholder="{{ 'ADMIN_EMAIL' | translate }} *" required>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-4 mb-5 form-group">
+    <label for="admin-password" class="form-label">{{ 'PASSWORD_LABEL' | translate }} *</label>
+    <app-password-input [placeholder]="'PASSWORD_LABEL' | translate" (toggleVisibility)="togglePasswordVisibility()" id="admin-password"></app-password-input>
+  </div>
+  <div class="col-4 mb-5 form-group">
+    <label for="confirm-password" class="form-label">{{ 'PASSWORD_CONFIRM_LABEL' | translate }} *</label>
+    <app-password-input [placeholder]="'PASSWORD_CONFIRM_LABEL' | translate" (toggleVisibility)="togglePasswordVisibility()" id="confirm-password"></app-password-input>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-4 mb-5 form-group">
+    <label for="adminDept" class="form-label">{{ 'USER_DEPT' | translate }} *</label>
+    <select title="SELECT_DEPT" class="form-control">
+      <option>{{ 'SELECT_DEPT' | translate }}</option>
+      <option>Managment</option>
+      <option>HR</option>
+      <option>Marketing</option>
+    </select>
+  </div>
+  <div class="col-4 mb-5 form-group">
+    <label for="adminRole" class="form-label">{{ 'USER_ROLE' | translate }} *</label>
+    <select title="SELECT_ROLE" class="form-control">
+      <option>{{ 'SELECT_ROLE' | translate }}</option>
+      <option>Admin</option>
+      <option>Manager</option>
+      <option>Client</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4 mb-5 form-group">
+    <label for="phoneNumber" class="form-label">{{ 'PHONE_NUMBER' | translate }} *</label>
+    <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" name="phoneNumber" placeholder="{{ 'PHONE_NUMBER' | translate }} *" required>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<app-table-filters
+  pageTitle="{{ 'ACTIVITY_LOG_TITLE' | translate }}"
+  [showDateFilter]="false"
+  [showAdditionalButton]="false"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "CREATION_DATE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.creationDate }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="adminName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ADMIN_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.adminName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="creationTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "TIME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.creationTime }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="activityTitle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ACTIVITY" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.activityTitle }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

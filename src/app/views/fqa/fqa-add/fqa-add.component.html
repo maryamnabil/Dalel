@@ -1,0 +1,14 @@
+<div class="page-content">
+
+    <app-backward linkText="{{ 'ADD_FQA_TITLE' | translate }}" backwardLink="/admin/fqa/fqas"></app-backward>
+  
+    <div class="form-content">
+      <form [formGroup]="FQAForm">
+        <app-fqa-form [FQAForm]="FQAForm" [formSubmitted]="formSubmitted"></app-fqa-form>
+      </form>
+    </div>
+  
+    <app-form-actions buttonPrimaryText="{{ 'CREATE_FQA' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+  
+  </div>
+  

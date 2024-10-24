@@ -1,0 +1,39 @@
+<div class="page-content">
+
+  <app-backward linkText="{{ 'ADD_ROLE_TITLE' | translate }}" [backwardLink]="getBackwardLink()"></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="roleAddForm">
+      <app-role-form [roleForm]="roleAddForm" [formSubmitted]="formSubmitted"></app-role-form>
+
+      <div class="row">
+        <label for="rolePermissions" class="form-label mb-3">{{ 'ROLE_PERMISSIONS' | translate }} *</label>
+        <div class="col-10 mb-5">
+
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Check All" id="checkAll" (change)="onCheckAllChange($event)">
+                <label class="form-check-label" for="checkAll">{{ 'CHECK_ALL' | translate }}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4" formArrayName="selectedPages">
+            <div class="col-3" *ngFor="let permission of allPages; let i = index">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{ permission.pageId }}" (change)="onChecked($event, permission.pageId)" [checked]="selectedPages.at(i).value" >
+                <label class="form-check-label" for="{{ permission.pageId }}">{{ permission.pageName }}</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <app-form-actions buttonPrimaryText="{{ 'SUBMIT' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+
+</div>

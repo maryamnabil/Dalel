@@ -1,0 +1,23 @@
+<div class="popup">
+  <h5 *ngIf="data.title" class="text-primary text-center mt-2">
+    {{ translatePopup(data.title) }}
+  </h5>
+  <mat-dialog-content class="p-3">
+    <div class="form-group text-dark">
+      <label class="fw-500">{{ translatePopup(data.inputLabel) }}</label>
+      <textarea
+        [(ngModel)]="inputText"
+        class="form-control text-black"
+        [class.invalid]="showValidation"
+      ></textarea>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-end p-0">
+    <button class="btn btn-danger" (click)="onCancelClick()">
+      {{ translatePopup(data.cancelButton) }}
+    </button>
+    <button class="btn btn-primary" (click)="onConfirmClick(inputText)">
+      {{ translatePopup(data.confirmButton) }}
+    </button>
+  </mat-dialog-actions>
+</div>

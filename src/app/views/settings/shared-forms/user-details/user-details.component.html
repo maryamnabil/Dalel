@@ -1,0 +1,30 @@
+<div class="col-md-6">
+    <div class="mb-3">
+      <strong class="text-secondary">{{ 'USER_NAME' | translate }}</strong>
+    </div>
+    <div class="mb-3">
+      <span *ngIf="User && User.fullName">{{User.fullName}}</span>
+    </div>
+  
+    <div class="mb-3">
+      <strong class="text-secondary">{{ 'EMAIL' | translate }}</strong>
+      <div class="d-flex align-items-center">
+      <span *ngIf="User && User.email">{{User.email}}</span>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <strong class="text-secondary">{{ 'USER_PHONE' | translate }}</strong>
+      <div class="d-flex align-items-center">
+        <span  *ngIf="User && User.phoneCode">{{User.phoneCode }} {{User.phoneNumber}}</span>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <strong class="text-secondary">{{ 'TITLE' | translate }}</strong>
+      <div class="d-flex align-items-center">
+        <span  *ngIf="User && User.role.name">{{User.role.name}}</span>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,21 @@
+<div [formGroup]="ClamSubjectForm">
+    <div class="row">
+      <div class="col-4 mb-5 form-group">
+        <label for="ClamSubjectName" class="form-label">{{ 'CLAM_NAME_EN' | translate }} *</label>
+        <input type="text" class="form-control" id="ClamSubjectName" formControlName="ClamSubjectName" name="ClamSubjectName" placeholder="{{ 'CLAM_NAME_EN' | translate }}" required>
+        <div class="error-messages" *ngIf="formSubmitted && ClamSubjectForm.get('ClamSubjectName')?.hasError('required')">
+          {{'NAME_REQUIRED' | translate}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-4 mb-5 form-group">
+        <label for="ClamSubjectNameAr" class="form-label">{{ 'CLAM_NAME_AR' | translate }} *</label>
+        <input type="text" class="form-control" id="ClamSubjectNameAr" formControlName="ClamSubjectNameAr" name="ClamSubjectNameAr" placeholder="{{ 'CLAM_NAME_AR' | translate }}" required>
+        <div class="error-messages" *ngIf="formSubmitted && ClamSubjectForm.get('ClamSubjectNameAr')?.hasError('required')">
+          {{'NAME_AR_REQUIRED' | translate}}
+        </div>
+      </div>
+    </div>
+  </div>

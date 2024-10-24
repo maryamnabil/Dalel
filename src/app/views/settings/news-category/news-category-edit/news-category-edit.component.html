@@ -1,0 +1,109 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'EDIT_NEWS_CATEGORY' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+
+  <div class="form-content mb-5">
+    <form [formGroup]="form">
+      <div class="row align-items-center g-5">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "TITLE_EN" | translate }} *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              name="name"
+              placeholder="{{ 'TITLE_EN' | translate }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('name')?.hasError('required')"
+            >
+              {{ "name_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "TITLE_AR" | translate }} *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nameAr"
+              formControlName="nameAr"
+              name="nameAr"
+              placeholder="{{ 'TITLE_AR' | translate }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2 no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('nameAr')?.hasError('required')"
+            >
+              {{ "nameAr_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "DESC_NAME_EN" | translate }} *</label
+            >
+            <textarea
+              class="form-control"
+              id="description"
+              formControlName="description"
+              name="description"
+              placeholder="{{ 'DESC_NAME_EN' | translate }}"
+              required
+            ></textarea>
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="
+                formSubmitted && form.get('description')?.hasError('required')
+              "
+            >
+              {{ "DESC_NAME_EN_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "DESC_NAME_AR" | translate }} *</label
+            >
+            <textarea
+              class="form-control"
+              id="descriptionAr"
+              formControlName="descriptionAr"
+              name="descriptionAr"
+              placeholder="{{ 'DESC_NAME_AR' | translate }}"
+              required
+            ></textarea>
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="
+                formSubmitted && form.get('descriptionAr')?.hasError('required')
+              "
+            >
+              {{ "DESC_NAME_AR_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'SUBMIT' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

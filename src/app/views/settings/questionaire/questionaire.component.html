@@ -1,0 +1,96 @@
+<app-table-filters
+  pageTitle="{{ 'Questionaire' | translate }}"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  buttonText="{{ 'Add_Question' | translate }}"
+  buttonLink="/admin/settings/questionaire/add-question"
+  [showAdditionalButton]="true"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Promo ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "ID" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Promo Code Column -->
+    <ng-container matColumnDef="question">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "Question_EN" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.question }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid From Column -->
+    <ng-container matColumnDef="questionAr">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "Question_AR" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.questionAr }}</mat-cell>
+    </ng-container>
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+        >{{ "ACTIONS" | translate }}</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <!-- <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/questionaire/edit-question',
+                element.id
+              ]"
+            >
+              {{ "EDIT" | translate }}
+            </button> -->
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="deleteQuestion(element.id)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+    ></mat-paginator
+  >
+</div>

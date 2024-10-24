@@ -1,0 +1,43 @@
+<mat-toolbar class="header">
+  <mat-toolbar-row class="justify-content-between">
+    <div class="header-left d-flex flex-row align-items-center">
+      <button
+        mat-icon-button
+        (click)="toggleSidebar()"
+        class="menu-toggle-button"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="header-right d-flex flex-row align-items-center">
+      <div class="header-icons">
+        <button class="language-switcher" (click)="toggleLanguage()">
+          <img
+            src="../assets/images/icons/header-icons/SA - Saudi Arabia.svg"
+            alt="Langunage Icon"
+          />
+        </button>
+      </div>
+
+      <div class="user-card" [matMenuTriggerFor]="menu">
+        <div class="user-photo">
+          <img src="../assets/images/dummy-user.jpg" alt="User Photo" />
+        </div>
+        <div class="user-details">
+          <div class="user-name">Ahmed Ali</div>
+          <div class="user-title">Super Admin</div>
+        </div>
+        <mat-menu #menu="matMenu" class="logout-menu">
+          <button
+            mat-menu-item
+            class="menu-link"
+            *ngIf="authService.isLoggedIn()"
+            (click)="logout()"
+          >
+            LOGOUT
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

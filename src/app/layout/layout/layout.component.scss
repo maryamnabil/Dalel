@@ -1,0 +1,66 @@
+@import "../../../assets/variables.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  mat-drawer-container {
+    height: 100vh;
+    background: $bg-darker;
+
+    mat-drawer {
+      width: 250px;
+      background: $bg-dark;
+    }
+  }
+
+  mat-drawer-content {
+    background: $bg-darker;
+  }
+}
+
+.content-wrapper {
+  padding: 24px 16px;
+  color: $grey-default;
+  font-size: $font-md;
+  min-height: calc(100vh - 178px);
+  background: $body-background;
+  font-family: $body-font;
+  font-size: $body-size;
+  font-weight: $body-weight;
+
+  ::ng-deep {
+    .page-content {
+      @include border-radius (4px);
+      background: $bg-light;
+      padding: 24px;
+    }
+
+    .form-content {
+      min-height: 400px;
+    }
+  }
+}
+
+
+/* Arabic Styles */
+body.arabic {
+  :host {
+    .mat-drawer-content {
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+
+    .mat-drawer-opened ~ .mat-drawer-content{
+      margin-right: 250px !important;
+      margin-left: 0 !important;
+    }
+
+    .content-wrapper {
+      font-family: $body-font-ar;
+      font-size: $body-size;
+      font-weight: $font-reg;
+    }
+  }
+}

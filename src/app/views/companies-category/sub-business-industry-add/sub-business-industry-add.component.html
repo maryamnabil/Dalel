@@ -1,0 +1,129 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'ADD_BUSINESS_INDUSTRY_SUB_CATEGORY' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="form">
+      <div class="row align-items-center g-5">
+        <div class="col-12 form-group">
+          <label class="form-label"
+            >{{ "BUSINESS_INDUSTRY" | translate }} *</label
+          >
+          <ng-select
+            class="dark-theme"
+            formControlName="parentCategoryId"
+            [placeholder]="'BUSINESS_INDUSTRY' | translate"
+            [searchable]="true"
+            bindValue="id"
+            bindLabel="name"
+            [items]="categories | translateOptions | async"
+            [notFoundText]="'NO_ITEMS' | translate"
+          >
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              {{ item | localizedName : "name" | async }}
+            </ng-template>
+          </ng-select>
+          <div
+            class="error-messages mt-2 no-spacing"
+            *ngIf="
+              formSubmitted &&
+              form.get('parentCategoryId')?.hasError('required')
+            "
+          >
+            {{ "BUSINESS_INDUSTRY_REQUIRED" | translate }}
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="nameAr" class="form-label"
+              >{{
+                "BUSINESS_INDUSTRY_SUB_CATEGORY_IN_ARABIC" | translate
+              }}
+              *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nameAr"
+              formControlName="nameAr"
+              name="nameAr"
+              placeholder="{{
+                'BUSINESS_INDUSTRY_SUB_CATEGORY_IN_ARABIC' | translate
+              }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2 no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('nameAr')?.hasError('required')"
+            >
+              {{ "CATEGORY_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="name" class="form-label"
+              >{{
+                "BUSINESS_INDUSTRY_SUB_CATEGORY_IN_ENGLISH" | translate
+              }}
+              *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              name="name"
+              placeholder="{{
+                'BUSINESS_INDUSTRY_SUB_CATEGORY_IN_ENGLISH' | translate
+              }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('name')?.hasError('required')"
+            >
+              {{ "CATEGORY_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mb-5">
+          <div class="form-group">
+            <label class="form-label">{{ "SKILSS" | translate }} *</label>
+            <ng-select
+              class="dark-theme"
+              formControlName="skillsIds"
+              [placeholder]="'SKILLS' | translate"
+              [searchable]="true"
+              bindValue="id"
+              bindLabel="name"
+              [items]="skills | translateOptions | async"
+              [multiple]="true"
+              [notFoundText]="'NO_ITEMS' | translate"
+            >
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                {{ item | localizedName : "name" | async }}
+              </ng-template>
+            </ng-select>
+            <div
+              class="error-messages mt-2 no-spacing"
+              *ngIf="
+                formSubmitted && form.get('skillsIds')?.hasError('required')
+              "
+            >
+              {{ "SKILLS_ARE_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'SUBMIT' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

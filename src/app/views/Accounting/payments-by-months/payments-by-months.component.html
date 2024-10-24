@@ -1,0 +1,24 @@
+
+
+<div class="report-block graph-block">
+    <div class="filter-wrapper">
+       <div class="row">
+        <div class="col-9">
+            <h3>{{ 'Report_Payment_By_Months_App_Paid' | translate }}</h3>
+
+        </div>
+        <div class="col-3">
+        <select (change)="onSelectDepartment($event)" >
+            <option value="" selected disabled>{{ 'YEARS' | translate }}</option>
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+         </div>
+       </div> 
+        
+    </div>
+    <div class="chart-wrapper">
+        <canvas id="PaymentChart" ></canvas>
+    </div>
+  </div>
+
+  

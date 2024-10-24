@@ -1,0 +1,13 @@
+<div class="app-container" [class.rtl]="isRTL">
+  <mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen">
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <app-header (toggleSidebarForMe)="sideBarToggler()" (toggleRTL)="toggleRTL()"></app-header>
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

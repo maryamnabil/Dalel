@@ -1,0 +1,104 @@
+<app-table-filters
+  pageTitle="{{ departmentName }}"
+  buttonText="{{ 'ADD_NEW_ROLE' | translate }}"
+  [buttonLink]="getAddLink()"
+  [showAdditionalButton]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeChanged({ fromDate: $event.startDate, toDate: $event.endDate })
+  "
+>
+</app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="roleName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ROLE_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.roleName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roleAssigned">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ROLE_ASSIGNED" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="role-assigned">
+        <div class="assigned-roles">
+          <ng-container
+            *ngFor="let permission of element.roleAssigned; let last = last"
+          >
+            {{ permission.name }}
+            <span *ngIf="!last">, </span>
+          </ng-container>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeesCount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ROLE_USERS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.employeesCount }} {{ "USERS_COUNT" | translate }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+      >
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/role-edit/',
+                departmentId,
+                element.roleId
+              ]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="deleteRole(element.roleId)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [length]="totalRecords"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecoreds"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

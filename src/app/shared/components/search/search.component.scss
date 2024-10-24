@@ -1,0 +1,43 @@
+@import "../../../../assets/variables.scss";
+
+.search-input {
+  .form-control {
+    @include border-radius(2px);
+    background: $bg-light;
+    border:none;
+    color: $white;
+    min-width: 250px;
+    padding-left: 42px;
+    height: 35px;
+    font-family: $body-font-secondary;
+    font-size: $font-md;
+    font-weight: $font-med;
+    &::placeholder {
+      color: #CBDBFB;
+    }
+  }
+
+  .btn {
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    padding: 3px;
+  }
+}
+
+/* Arabic Styles */
+body.arabic {
+  .search-input {
+    .form-control {
+      padding-right: 42px;
+      height: 35px;
+      font-family: $body-font-ar;
+      font-weight: $font-reg;
+    }
+
+    .btn {
+      right: 10px;
+      left: auto;
+    }
+  }
+}

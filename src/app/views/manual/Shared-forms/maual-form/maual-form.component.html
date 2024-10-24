@@ -1,0 +1,41 @@
+<div [formGroup]="manualForm">
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="TitleEN" class="form-label">{{ 'Title_EN' | translate }} *</label>
+      <input type="text" class="form-control" id="TitleEN" formControlName="TitleEN" name="TitleEN" placeholder="{{ 'Title_EN' | translate }}" required>
+      <div class="error-messages" *ngIf="formSubmitted && manualForm.get('TitleEN')?.hasError('required')">
+        {{ 'TitleEN_REQUIRED' | translate }}
+      </div>
+    </div>
+    <div class="col-4 mb-5 form-group">
+      <label for="TitleAr" class="form-label">{{ 'TITLE_AR' | translate }} *</label>
+      <input type="text" class="form-control" id="TitleAr" formControlName="TitleAr" name="TitleAr" placeholder="{{ 'TITLE_AR' | translate }}" required>  
+      <div class="error-messages" *ngIf="formSubmitted && manualForm.get('TitleEN')?.hasError('required')">
+        {{ 'TitleAR_REQUIRED' | translate }}
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class=" mb-5 form-group">
+      <label for="description" class="form-label">{{ 'DESC_NAME_EN' | translate }} *</label>
+      <textarea type="text" class="form-control" id="description" formControlName="description" name="description" placeholder="{{ 'DESC_NAME_EN' | translate }}"  style="height: 10px;" ></textarea>
+      <div class="error-messages" *ngIf="formSubmitted && manualForm.get('description')?.hasError('required')">
+        {{ 'DESC_NAME_EN_REQUIRED' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class=" mb-5 form-group">
+      <label for="descriptionAr" class="form-label">{{ 'DESC_NAME_AR' | translate }} *</label>
+      <textarea type="text" class="form-control" id="descriptionAr" formControlName="descriptionAr" name="descriptionAr" placeholder="{{ 'DESC_NAME_AR' | translate }}" style="height: 10px;"></textarea>
+      <div class="error-messages" *ngIf="formSubmitted && manualForm.get('descriptionAr')?.hasError('required')">
+        {{ 'DESC_NAME_AR_REQUIRED' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mb-5 form-group">
+    <label for="URL" class="form-label">{{ 'URL' | translate }}</label>
+    <input type="text" class="form-control" id="URL" formControlName="URL" name="URL" placeholder="{{ 'URL' | translate }}" >
+  </div>
+</div>

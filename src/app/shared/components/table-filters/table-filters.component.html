@@ -1,0 +1,146 @@
+<div class="table-filters d-flex flex-wrap gap-4 justify-content-between">
+  <div class="page-title d-flex align-items-center">
+    <span class="title-text">
+      {{ pageTitle }}
+      <small class="title-sub" *ngIf="showSubTitle">{{ subTitle }}</small>
+    </span>
+    <div class="search-field position-relative" *ngIf="showSearchFiltre">
+      <input
+        (input)="applyFilter($event)"
+        placeholder="{{ 'SEARCH' | translate }}"
+        class="form-control"
+      />
+      <img
+        class="menu-icon"
+        src="../assets/images/icons/search-normal.svg"
+        width="14"
+        alt="Search icon"
+      />
+    </div>
+  </div>
+
+  <div class="actions-side d-flex align-items-center">
+    <div class="select-status" *ngIf="showAccountingDropDown">
+      <select (change)="onSelectAccountStatus($event)">
+        <option value="" disabled selected>
+          {{ "FILTER_BY_STATUS" | translate }}
+        </option>
+        <option value="">{{ "ALL" | translate }}</option>
+        <option value="1">{{ "PAID" | translate }}</option>
+        <option value="2">{{ "NOT_PAID" | translate }}</option>
+        <option value="3">{{ "PROBLEM" | translate }}</option>
+      </select>
+    </div>
+    <div class="select-status" *ngIf="showIsClosed">
+      <select
+        (change)="OnStausChange($event)"
+        aria-label="Default select example"
+        style="width: 175px"
+      >
+        <option value="" disabled selected>
+          {{ "FILTER_BY_STATUS" | translate }}
+        </option>
+        <option value="">{{ "ALL" | translate }}</option>
+        <option value="1">{{ "CLOSED" | translate }}</option>
+        <option value="0">{{ "OPENED" | translate }}</option>
+      </select>
+    </div>
+
+    <div class="select-status" *ngIf="showDropDown">
+      <select>
+        <option>{{ "PAID" | translate }}</option>
+        <option>{{ "NOT_PAID" | translate }}</option>
+      </select>
+    </div>
+
+    <div class="select-status" *ngIf="showDropDownAuthority">
+      <select>
+        <option>{{ "ALL" | translate }}</option>
+        <option>{{ "SAUDI_AUTHORITY" | translate }}</option>
+        <option>{{ "SAUDI_ART_ASSOCIATION" | translate }}</option>
+        <option>{{ "SELL_PERMISSIONS" | translate }}</option>
+        <option>{{ "GALLERY_ORDERS" | translate }}</option>
+      </select>
+    </div>
+
+    <div
+      *ngIf="showDateFilter"
+      class="date-range-filter date-filter d-flex align-items-center"
+    >
+      <span class="filter-label">{{ "DATE_FILTER" | translate }}</span>
+      <mat-form-field>
+        <mat-date-range-input [rangePicker]="picker">
+          <input
+            matStartDate
+            placeholder="Start date"
+            [(ngModel)]="startDate"
+            (click)="picker.open()"
+            (ngModelChange)="onDateChanged()"
+          />
+          <input
+            matEndDate
+            placeholder="End date"
+            [(ngModel)]="endDate"
+            (click)="picker.open()"
+            (ngModelChange)="onDateChanged()"
+          />">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"
+          ><img
+            matDatepickerToggleIcon
+            src="/assets/images/icons/calendar.svg"
+            alt="Calendar Icon"
+        /></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="mx-5">
+      <ng-content select="[dropDownFilter]"></ng-content>
+    </div>
+  </div>
+
+  <div
+    class="d-flex flex-wrap gap-3"
+    *ngIf="
+      showSecondButton ||
+      showAdditionalButton ||
+      showAddGroupButton ||
+      showExportToBank
+    "
+  >
+    <button
+      class="btn btn-primary"
+      *ngIf="showExportToBank"
+      (click)="OnExportToBank()"
+    >
+      + {{ ExportToBankText }}
+    </button>
+    <button
+      class="btn btn-primary"
+      *ngIf="showAddGroupButton"
+      (click)="AddGroup()"
+    >
+      + {{ AccountingButtonText }}
+    </button>
+    <button
+      class="btn btn-primary"
+      *ngIf="showSecondButton"
+      routerLink="{{ secondButtonLink }}"
+    >
+      {{ secondButtonText }}
+    </button>
+
+    <button
+      class="btn btn-primary"
+      *ngIf="showAdditionalButton"
+      routerLink="{{ buttonLink }}"
+    >
+      + {{ buttonText }}
+    </button>
+  </div>
+  <div *ngIf="showExportBtn">
+    <button class="btn btn-outline">
+      {{ "EXPORT_FILE" | translate }}
+    </button>
+  </div>
+</div>

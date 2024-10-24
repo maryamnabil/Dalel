@@ -1,0 +1,110 @@
+<app-table-filters
+  pageTitle="{{ 'PAY_SLIP' | translate }}"
+  [showAdditionalButton]="false"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  [showAddGroupButton]="true"
+  (AddGroupClicked)="onAddGroup()"
+  AccountingButtonText="{{ 'ADD_GROUP' | translate }}"
+></app-table-filters>
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="selectAll">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          #selectAllCheckbox
+          (change)="selectAllRows(selectAllCheckbox.checked)"
+        ></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-checkbox
+          [checked]="selectAllCheckbox.checked"
+          (change)="
+            selectRow($event, element.termId, selectAllCheckbox.checked)
+          "
+        ></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="companyName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "COMPANY_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.company_Name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vendorName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "VENDOR_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.vendor_Name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="projectName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PROJECT_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.projectName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PAYMENT_ID" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.termId }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="paymentDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PAYMENT_DATE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.clientPayDate | date }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "AMOUNT" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PAYMENT_STATUS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span
+          class="status"
+          [ngClass]="element.is_Paid ? 'active-status' : 'inactive-status'"
+        >
+          {{ (element.is_Paid ? "PAID" : "NOT_PAID") | translate }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

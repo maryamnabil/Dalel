@@ -1,0 +1,155 @@
+<div *ngIf="dataSource.data && dataSource.data.length > 0; else noDataTemplate">
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container
+        *ngFor="let config of configs"
+        matColumnDef="{{ config.column }}"
+      >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ config.column | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <ng-container [ngSwitch]="config.type">
+            <!-- photo columns -->
+            <ng-container *ngSwitchCase="'photo'">
+              <ng-container
+                *ngIf="
+                  getValue(element, config.column)
+                    | secureUrl
+                    | async as imageUrl
+                "
+              >
+                <a [href]="imageUrl" target="_blank">
+                  <img
+                    width="34px"
+                    height="34px"
+                    [src]="imageUrl"
+                    [alt]="config.column"
+                  />
+                </a>
+              </ng-container>
+            </ng-container>
+            <!-- Dynamic html content -->
+            <ng-container *ngSwitchCase="'contentTemplate'">
+              <ng-container *ngIf="config.contentTemplate">
+                <ng-container
+                  *ngTemplateOutlet="
+                    config.contentTemplate;
+                    context: { $implicit: element }
+                  "
+                ></ng-container>
+              </ng-container>
+            </ng-container>
+            <!-- Date columns -->
+            <ng-container *ngSwitchCase="'date'">
+              <span class="d-inline-block mb-1" [class]="config.class">{{
+                getValue(element, config.column) | date : "d/M/yyyy"
+              }}</span>
+            </ng-container>
+            <!-- Links columns -->
+            <ng-container *ngSwitchCase="'link'">
+              <a
+                [href]="getLink(element, config.column) | secureUrl | async"
+                target="_blank"
+                class="d-inline-block mb-1"
+                [class]="config.class"
+                >{{ getValue(element, config.column) }}</a
+              >
+            </ng-container>
+            <ng-container *ngSwitchCase="'routeLink'">
+              <a
+                [routerLink]="getRouteLink(element, config.column)"
+                class="d-inline-block mb-1"
+                [class]="config.class"
+                >{{ getValue(element, config.column) }}</a
+              >
+            </ng-container>
+            <!-- Text with localizedName pipe -->
+            <ng-container *ngSwitchCase="'textLocalized'">
+              <span class="d-inline-block mb-1" [class]="config.class">{{
+                getValue(element, config.column)
+                  | localizedName : config.localizedKey
+                  | async
+              }}</span>
+            </ng-container>
+            <!-- Text Column -->
+            <ng-container *ngSwitchDefault>
+              <span
+                [title]="getValue(element, config.column)"
+                class="d-inline-block mb-1"
+                [class]="config.class"
+                >{{ getValue(element, config.column) }}</span
+              >
+            </ng-container>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="d-flex justify-content-end"
+        >
+          {{ "ACTIONS" | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+          <div class="actions-menu" *ngIf="showActions">
+            <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+              <mat-icon
+                aria-hidden="false"
+                aria-label="more icon"
+                fontIcon="more_vert"
+              ></mat-icon>
+            </div>
+            <mat-menu #menu="matMenu">
+              <button
+                mat-menu-item
+                class="menu-link"
+                *ngIf="showViewDetails"
+                [routerLink]="[viewDetailsUrl, element.id]"
+              >
+                {{ "VIEW_DETAILS" | translate }}
+              </button>
+              <button
+                mat-menu-item
+                class="menu-link"
+                *ngIf="showEdit"
+                [routerLink]="[editUrl, element.id]"
+              >
+                {{ "EDIT" | translate }}
+              </button>
+              <button
+                mat-menu-item
+                class="menu-link danger-text"
+                *ngIf="showDelete"
+                (click)="delete(element.id)"
+              >
+                {{ "DELETE" | translate }}
+              </button>
+            </mat-menu>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>
+
+<ng-template #noDataTemplate>
+  <div class="no-data-message py-5 text-center">
+    {{ "NO_DATA_AVAILABLE" | translate }}
+  </div>
+</ng-template>
+
+<div *ngIf="dataSource?.data && showPagination" class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    [showFirstLastButtons]="true"
+    (page)="onPageChanged($event)"
+  ></mat-paginator>
+</div>

@@ -1,0 +1,13 @@
+<div class="page-content">
+
+    <app-backward linkText="{{ 'Edit_ClaimSubject' | translate }}" backwardLink="/admin/claim-subject/claim-list"></app-backward>
+  
+    <div class="form-content">
+      <form [formGroup]="clamEditForm">
+        <app-clam-subject-form  [ClamSubjectForm]="clamEditForm" [formSubmitted]="formSubmitted"></app-clam-subject-form >
+      </form>
+    </div>
+  
+    <app-form-actions buttonPrimaryText="{{ 'UPDATE' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+  
+  </div>

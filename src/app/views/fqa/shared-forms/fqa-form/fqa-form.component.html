@@ -1,0 +1,37 @@
+<div [formGroup]="FQAForm">
+    <div class="row">
+      <div class="col-6 mb-5 form-group">
+        <label for="question" class="form-label">{{ 'Question_EN' | translate }} *</label>
+        <input type="text" class="form-control" id="question" formControlName="question" name="question" placeholder="{{ 'Question_EN' | translate }}" required>
+        <div class="error-messages" *ngIf="formSubmitted && FQAForm.get('question')?.hasError('required')">
+          {{ 'Question_EN_REQUIRED' | translate }}
+        </div>
+      </div>
+      <div class="col-6 mb-5 form-group">
+        <label for="questionAr" class="form-label">{{ 'Question_AR' | translate }} *</label>
+        <input type="text" class="form-control" id="questionAr" formControlName="questionAr" name="questionAr" placeholder="{{ 'Question_AR' | translate }}" required>  
+        <div class="error-messages" *ngIf="formSubmitted && FQAForm.get('questionAr')?.hasError('required')">
+          {{ 'Question_AR_REQUIRED' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" mb-5 form-group">
+        <label for="answer" class="form-label">{{ 'Answer_EN' | translate }} *</label>
+        <textarea type="text" class="form-control" id="answer" formControlName="answer" name="answer" placeholder="{{ 'Answer_EN' | translate }}"  style="height: 10px;" ></textarea>
+        <div class="error-messages" *ngIf="formSubmitted && FQAForm.get('answer')?.hasError('required')">
+          {{ 'Answer_EN_REQUIRED' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" mb-5 form-group">
+        <label for="answerAr" class="form-label">{{ 'Answer_AR' | translate }} *</label>
+        <textarea type="text" class="form-control" id="answerAr" formControlName="answerAr" name="answerAr" placeholder="{{ 'Answer_AR' | translate }}" style="height: 10px;"></textarea>
+        <div class="error-messages" *ngIf="formSubmitted && FQAForm.get('answerAr')?.hasError('required')">
+          {{ 'Answer_AR_REQUIRED' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  

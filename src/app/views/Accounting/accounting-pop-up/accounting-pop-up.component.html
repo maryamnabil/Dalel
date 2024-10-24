@@ -1,0 +1,23 @@
+<div class="popup reject-popup p-0">
+  <mat-dialog-content>
+    <div class="dialog-header d-flex justify-content-between">
+      <strong>{{ translatedTitle }}</strong>
+      <button (click)="closeDialog()" class="close-popup">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="rejection-reason">
+      <label for="reason">{{ translatedMessage }}</label>
+      <textarea
+        placeholder="{{ translatedMessage }}"
+        [(ngModel)]="rejectionReason"
+        class="form-control"
+      ></textarea>
+    </div>
+    <mat-dialog-actions class="justify-content-end my-3 p-0">
+      <button class="btn btn-primary m-0" (click)="onSave()">
+        {{ "SAVE" | translate }}
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</div>

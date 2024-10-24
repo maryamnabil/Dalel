@@ -1,0 +1,24 @@
+<div class="page-content">
+
+  <app-backward linkText="{{ 'EDIT_TAX_TITLE' | translate }}" backwardLink="/admin/settings/taxes"></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="vatEditForm">
+      <div class="row">
+        <div class="col-4 mb-5 form-group">
+          <label for="vatRate" class="form-label">{{ 'VAT_RATE' | translate }} *</label>
+          <input type="text" class="form-control" id="vatRate" formControlName="vatRate" name="vatRate" [(ngModel)]="vatRateValue" placeholder="{{ 'VAT_RATE' | translate }}" required>
+          <div class="error-messages" *ngIf="formSubmitted && vatEditForm.get('vatRate')?.hasError('required')">
+            {{'VAT_RATE_REQUIRED' | translate}}
+          </div>
+          <div class="error-messages" *ngIf="formSubmitted && vatEditForm.get('vatRate')?.hasError('invalidNumber')">
+            {{ 'VAT_RATE_INVALID_NUMBER' | translate }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions buttonPrimaryText="{{ 'SUBMIT' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+
+</div>

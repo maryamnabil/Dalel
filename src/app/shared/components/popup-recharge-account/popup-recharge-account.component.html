@@ -1,0 +1,32 @@
+<div class="popup">
+  <h5 class="text-primary text-center mt-2">
+    {{ "RECHARGE_ACCOUNT" | translate }}
+  </h5>
+  <mat-dialog-content class="p-3">
+    <div class="form-group text-dark mb-3">
+      <label class="fw-500">{{ "AMOUNT" | translate }}</label>
+      <input
+        type="number"
+        [(ngModel)]="amount"
+        class="form-control text-black"
+        [class.invalid]="showValidation"
+      />
+    </div>
+    <div class="form-group text-dark">
+      <label class="fw-500">{{ "DESCRIPTION" | translate }}</label>
+      <textarea
+        [(ngModel)]="description"
+        class="form-control text-black"
+        [class.invalid]="showValidation"
+      ></textarea>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-end p-0">
+    <button class="btn btn-danger" (click)="onCancelClick()">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button class="btn btn-primary" (click)="onConfirmClick()">
+      {{ "CONFIRM" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

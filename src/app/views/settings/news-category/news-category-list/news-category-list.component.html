@@ -1,0 +1,26 @@
+<app-table-filters
+  pageTitle="{{ 'NEWS_CATEGORY' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="true"
+  buttonText="{{ 'ADD_NEWS_CATEGORY' | translate }}"
+  buttonLink="/admin/settings/news-category/news-category-add"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [viewDetailsUrl]="'/admin/settings/news/news-list'"
+  [editUrl]="'/admin/settings/news-category/news-category-edit'"
+  (onPageChangeEvt)="onPageChanged($event)"
+  (onDeleteEvt)="delete($event)"
+>
+</app-table>

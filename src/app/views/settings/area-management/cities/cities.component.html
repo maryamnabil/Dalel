@@ -1,0 +1,150 @@
+<app-table-filters
+  pageTitle="{{ 'CITIES' | translate }} ({{ countryName }})"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  buttonText="{{ 'ADD_NEW_CITY' | translate }}"
+  [buttonLink]="'/admin/settings/area-management/add-city/' + countryId"
+  [showAdditionalButton]="true"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Promo ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "CITY_ID" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Promo Code Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "CITY_NAME_EN" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid From Column -->
+    <ng-container matColumnDef="nameAr">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "CITY_NAME_AR" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.nameAr }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid To Column -->
+    <ng-container matColumnDef="numberDistrict">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "DISTRICTS" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.numberDistrict
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Discount Percentage Column -->
+    <ng-container matColumnDef="createdOn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "CREATION_DATE" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.createdOn }}</mat-cell>
+    </ng-container>
+
+    <!-- Is Active Column -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "IS_ACTIVE" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div
+          [ngClass]="{
+            'text-success': element.status == 1,
+            'text-danger': element.status == 2
+          }"
+        >
+          {{
+            element.status == 1
+              ? ("ACTIVE" | translate)
+              : ("INACTIVE" | translate)
+          }}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+        >{{ "ACTIONS" | translate }}</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/area-management/edit-city/' +
+                  countryId +
+                  '/' +
+                  element.id
+              ]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/area-management/districts/' + element.id,
+                {
+                  cityName: currentLang == 'ar' ? element.nameAr : element.name
+                }
+              ]"
+            >
+              {{ "DISTRICTS" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="deleteCity(element.id)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+    ></mat-paginator
+  >
+</div>

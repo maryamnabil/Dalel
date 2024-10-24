@@ -1,0 +1,191 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'ADD_NEWS' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="form">
+      <div class="row align-items-center g-5">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="newsCat" class="form-label"
+              >{{ "NEWS_CATEGORY" | translate }} *</label
+            >
+            <ng-select
+              class="dark-theme"
+              [placeholder]="'NEWS_CATEGORY' | translate"
+              [searchable]="true"
+              id="newsCat"
+              bindValue="id"
+              bindLabel="name"
+              [appendTo]="'body'"
+              formControlName="newsCategoryId"
+              [items]="categories | translateOptions | async"
+              [notFoundText]="'NO_ITEMS' | translate"
+            >
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                {{ item | localizedName : "name" | async }}
+              </ng-template>
+            </ng-select>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "TITLE_EN" | translate }} *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="titleEn"
+              formControlName="titleEn"
+              name="titleEn"
+              placeholder="{{ 'TITLE_EN' | translate }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('titleEn')?.hasError('required')"
+            >
+              {{ "TitleEN_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "TITLE_AR" | translate }} *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="titleAr"
+              formControlName="titleAr"
+              name="titleAr"
+              placeholder="{{ 'TITLE_AR' | translate }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2 no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('titleAr')?.hasError('required')"
+            >
+              {{ "TitleAR_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "DESC_NAME_EN" | translate }} *</label
+            >
+            <textarea
+              class="form-control"
+              id="descriptionEn"
+              formControlName="descriptionEn"
+              name="descriptionEn"
+              placeholder="{{ 'DESC_NAME_EN' | translate }}"
+              required
+            ></textarea>
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="
+                formSubmitted && form.get('descriptionEn')?.hasError('required')
+              "
+            >
+              {{ "DESC_NAME_EN_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="type" class="form-label"
+              >{{ "DESC_NAME_AR" | translate }} *</label
+            >
+            <textarea
+              class="form-control"
+              id="descriptionAr"
+              formControlName="descriptionAr"
+              name="descriptionAr"
+              placeholder="{{ 'DESC_NAME_AR' | translate }}"
+              required
+            ></textarea>
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="
+                formSubmitted && form.get('descriptionAr')?.hasError('required')
+              "
+            >
+              {{ "DESC_NAME_AR_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <h5 class="mb-4">{{ "ATTACHMENTS" | translate }}</h5>
+        <div class="mb-5 col-12 mt-0">
+          <!-- FormArray for attachments -->
+          <div formArrayName="attachments">
+            <!-- Iterate over attachment controls -->
+            <div
+              class="mb-5"
+              *ngFor="
+                let attachmentControl of attachmentsFormArray.controls;
+                let i = index
+              "
+            >
+              <!-- Button to remove attachment -->
+              <div class="form-group">
+                <!-- File uploader for each attachment -->
+                <div class="d-flex gap-3 align-items-center">
+                  <div style="min-width: 80%">
+                    <app-file-uploader
+                      [title]="'(' + (i + 1) + ')'"
+                      [formControlName]="i"
+                      (onRemoveFile)="onRemoveFile(attachmentControl.value)"
+                    ></app-file-uploader>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-danger my-3"
+                    (click)="
+                      onRemoveFile(attachmentControl.value);
+                      removeAttachmentControl(i)
+                    "
+                    *ngIf="attachmentsFormArray.length > 1"
+                  >
+                    {{ "REMOVE_ATTACHMENT" | translate }}
+                  </button>
+                </div>
+
+                <!-- Error message if attachment is required -->
+                <div
+                  class="error-messages mt-2 no-spacing"
+                  *ngIf="
+                    formSubmitted && attachmentControl.hasError('required')
+                  "
+                >
+                  {{ "ATTACHMENT_REQUIRED" | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Button to add new attachment -->
+          <div class="mt-5">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="addAttachmentControl()"
+            >
+              + {{ "ADD_ATTACHMENT" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'SUBMIT' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

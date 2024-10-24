@@ -1,0 +1,70 @@
+<div class="dashboard-container">
+  <div class="page-filter d-flex justify-content-end mb-4">
+    <app-date-range-filter
+      (dateRangeChanged)="
+        onDateRangeFilterApplied({
+          fromDate: $event.fromDate,
+          toDate: $event.toDate
+        })
+      "
+    ></app-date-range-filter>
+  </div>
+
+  <div class="report-row">
+    <div class="row">
+      <div class="col">
+        <app-stat-block
+          title="{{ 'TOTAL' | translate }}"
+          number="{{ TOTAL | number : '1.2-2' }} {{ 'SR' | translate }}"
+          icon="/assets/images/icons/dashboard-icons/resell.svg"
+        ></app-stat-block>
+      </div>
+      <div class="col">
+        <app-stat-block
+          title="{{ 'PAID' | translate }}"
+          number="{{ PAID | number : '1.2-2' }} {{ 'SR' | translate }}"
+          icon="/assets/images/icons/dashboard-icons/gallery.svg"
+        ></app-stat-block>
+      </div>
+      <div class="col">
+        <app-stat-block
+          title="{{ 'REMAINING_TO_PAY' | translate }}"
+          number="{{ REMAINING_TO_PAY | number : '1.2-2' }} {{
+            'SR' | translate
+          }}"
+          icon="/assets/images/icons/dashboard-icons/income.svg"
+        ></app-stat-block>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-row">
+    <div class="row">
+      <div class="col-6">
+        <app-graph-block
+          GraphNo="3"
+          GraphTitle="{{ 'Total_Earning_WithOut_Vat' | translate }}"
+        ></app-graph-block>
+      </div>
+      <div class="col-6">
+        <app-graph-block
+          GraphNo="5"
+          GraphTitle="{{ 'TOTAL_VAT' | translate }}"
+        ></app-graph-block>
+      </div>
+    </div>
+  </div>
+  <div class="report-row">
+    <div class="row">
+      <div class="col-6">
+        <app-payments-by-months></app-payments-by-months>
+      </div>
+      <div class="col-6">
+        <app-graph-block
+          GraphNo="4"
+          GraphTitle="{{ 'Total_Commission_WithOut_Vat' | translate }}"
+        ></app-graph-block>
+      </div>
+    </div>
+  </div>
+</div>

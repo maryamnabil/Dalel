@@ -1,0 +1,40 @@
+<div class="sidebar-menu">
+  <mat-nav-list>
+    <!-- <div class="app-logo d-flex justify-content-center">
+      <img src="../assets/images/yamam-logo.svg" width="72" alt="Yamam Logo"/>
+    </div> -->
+
+    <ng-container *ngFor="let menuItem of menuItems">
+      <ng-container *ngIf="!menuItem.subMenu">
+        <mat-list-item
+          [routerLink]="[menuItem.link]"
+          routerLinkActive="active"
+          class="menu-item"
+        >
+          <span class="menu-icon">
+            <i [class]="menuItem.icon"></i>
+          </span>
+          <span mat-line>{{ translateLabel(menuItem.label) }}</span>
+        </mat-list-item>
+      </ng-container>
+
+      <ng-container *ngIf="menuItem.subMenu">
+        <mat-expansion-panel (opened)="panelOpened()" (closed)="panelClosed()">
+          <mat-expansion-panel-header [routerLink]="[menuItem.link]">
+            <span class="menu-icon {{ menuItem.icon }}"></span>
+            <span>{{ translateLabel(menuItem.label) }}</span>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item
+              *ngFor="let subMenuItem of menuItem.subMenu"
+              [routerLink]="[subMenuItem.link]"
+              routerLinkActive="active"
+            >
+              <span mat-line>{{ translateLabel(subMenuItem.label) }} </span>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </ng-container>
+    </ng-container>
+  </mat-nav-list>
+</div>

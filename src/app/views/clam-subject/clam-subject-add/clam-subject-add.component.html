@@ -1,0 +1,14 @@
+
+<div class="page-content">
+
+    <app-backward linkText="{{ 'ADD_Clam_TITLE' | translate }}" backwardLink="/admin/claim-subject/claim-list"></app-backward>
+  
+    <div class="form-content">
+      <form [formGroup]="ClamAddForm">
+        <app-clam-subject-form [ClamSubjectForm]="ClamAddForm" [formSubmitted]="formSubmitted"></app-clam-subject-form >
+      </form>
+    </div>
+  
+    <app-form-actions buttonPrimaryText="{{ 'CREATE_Clam' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+  
+  </div>

@@ -1,0 +1,12 @@
+<div class="page-content">
+
+    <app-backward linkText="{{ 'Edit_Manual'| translate }}" backwardLink="/admin/manual/manuals"></app-backward>
+    <div class="form-content">
+      <form [formGroup]="ManualEditForm">
+        <app-maual-form [manualForm]="ManualEditForm" [formSubmitted]="formSubmitted"></app-maual-form>
+      </form>
+    </div>
+  
+    <app-form-actions buttonPrimaryText="{{ 'UPDATE' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+  
+  </div>

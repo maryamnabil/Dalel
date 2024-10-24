@@ -1,0 +1,131 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'EDIT_SUBSCRIPTON_TITLE' | translate }}"
+    backwardLink="/admin/settings/subscription"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="subscriptionForm">
+      <div class="row">
+        <!-- Name Field -->
+        <div class="col-4 mb-5 form-group">
+          <label for="name" class="form-label"
+            >{{ "NAME" | translate }} *</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="{{ 'NAME' | translate }}"
+            required
+          />
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted &&
+              subscriptionForm.get('name')?.hasError('required')
+            "
+          >
+            {{ "NAME_REQUIRED" | translate }}
+          </div>
+        </div>
+
+        <!-- Arabic Name Field -->
+        <div class="col-4 mb-5 form-group">
+          <label for="nameAr" class="form-label"
+            >{{ "NAME_AR" | translate }} *</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="nameAr"
+            formControlName="nameAr"
+            placeholder="{{ 'NAME_AR' | translate }}"
+            required
+          />
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted &&
+              subscriptionForm.get('nameAr')?.hasError('required')
+            "
+          >
+            {{ "NAME_AR_REQUIRED" | translate }}
+          </div>
+        </div>
+
+        <!-- Price Field -->
+        <div class="col-4 mb-5 form-group">
+          <label for="price" class="form-label"
+            >{{ "PRICE" | translate }} *</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            formControlName="price"
+            placeholder="{{ 'PRICE' | translate }}"
+            required
+          />
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted &&
+              subscriptionForm.get('price')?.hasError('required')
+            "
+          >
+            {{ "PRICE_REQUIRED" | translate }}
+          </div>
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted && subscriptionForm.get('price')?.hasError('min')
+            "
+          >
+            {{ "PRICE_INVALID" | translate }}
+          </div>
+        </div>
+
+        <!-- Number of Valid Days Field -->
+        <div class="col-4 mb-5 form-group">
+          <label for="numberOfValidDays" class="form-label"
+            >{{ "NUMBER_OF_VALID_DAYS" | translate }} *</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="numberOfValidDays"
+            formControlName="numberOfValidDays"
+            placeholder="{{ 'NUMBER_OF_VALID_DAYS' | translate }}"
+            required
+          />
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted &&
+              subscriptionForm.get('numberOfValidDays')?.hasError('required')
+            "
+          >
+            {{ "NUMBER_OF_VALID_DAYS_REQUIRED" | translate }}
+          </div>
+          <div
+            class="error-messages"
+            *ngIf="
+              formSubmitted &&
+              subscriptionForm.get('numberOfValidDays')?.hasError('min')
+            "
+          >
+            {{ "NUMBER_OF_VALID_DAYS_INVALID" | translate }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'SUBMIT' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

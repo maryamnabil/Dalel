@@ -1,0 +1,28 @@
+<div class="date-range-filter date-filter d-flex align-items-center">
+  <span class="filter-label">{{ "DATE_FILTER" | translate }}</span>
+  <mat-form-field>
+    <mat-date-range-input [rangePicker]="picker">
+      <input
+        matStartDate
+        placeholder="Start date"
+        [(ngModel)]="startDate"
+        (dateChange)="onDateChanged()"
+        (click)="picker.open()"
+      />
+      <input
+        matEndDate
+        placeholder="End date"
+        [(ngModel)]="endDate"
+        (dateChange)="onDateChanged()"
+        (click)="picker.open()"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"
+      ><img
+        matDatepickerToggleIcon
+        src="/assets/images/icons/calendar.svg"
+        alt="Calendar Icon"
+    /></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</div>

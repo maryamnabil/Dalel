@@ -1,0 +1,187 @@
+@import "../../../assets/variables.scss";
+
+.app-logo {
+  padding: 30px 0 20px 0;
+}
+
+:host {
+  ::ng-deep {
+    .sidebar-menu {
+      mat-list-item {
+        height: 47px;
+        .mdc-list-item__primary-text {
+          font-family: $body-font-secondary;
+          color: $text-grey-light;
+          font-size: $font-lg;
+          font-weight: $font-med;
+          display: flex;
+          align-items: center;
+          white-space: normal;
+          text-transform: capitalize;
+        }
+
+        .menu-icon {
+          font-size: 20px;
+          margin-right: 8px;
+          &:before {
+            color: $text-grey-light;
+          }
+        }
+
+        &.active {
+          .mdc-list-item__primary-text {
+            color: $primary;
+          }
+          .menu-icon {
+            &:before {
+              color: $primary;
+            }
+          }
+        }
+
+        &:hover {
+          .mdc-list-item__primary-text {
+            color: $primary;
+          }
+          .menu-icon {
+            &:before {
+              color: $primary;
+            }
+          }
+        }
+      }
+
+      mat-expansion-panel {
+        background: transparent;
+        box-shadow: none;
+
+        mat-expansion-panel-header {
+          padding: 0 $spacing;
+          font-family: $body-font-secondary;
+          color: $text-grey-light;
+          font-size: $font-lg;
+          font-weight: $font-med;
+          height: 47px;
+
+          .mat-expansion-indicator {
+            &:after {
+              color: $text-grey-light;
+            }
+          }
+
+          .menu-icon {
+            font-size: 20px;
+            margin-right: 8px;
+            &:before {
+              color: $text-grey-light;
+            }
+          }
+        }
+
+        .mat-expansion-panel-body {
+          padding: 0;
+          padding-left: 26px;
+        }
+
+        mat-list {
+          padding: 0;
+        }
+
+        .mdc-list-item__primary-text {
+          cursor: pointer;
+          &:before {
+            @include border-radius(50%);
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: $primary;
+            margin-right: 12px;
+            display: inline-block;
+            position: relative;
+            top: -1px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Arabic Styles */
+body.arabic {
+  :host {
+    ::ng-deep {
+      .sidebar-menu {
+        mat-list-item {
+          .mdc-list-item__primary-text {
+            font-family: $body-font-ar;
+            font-weight: $font-reg;
+          }
+
+          &.active {
+            .mdc-list-item__primary-text {
+              font-weight: $font-med;
+            }
+          }
+
+          .menu-icon {
+            margin-left: 8px;
+            margin-right: 0;
+          }
+        }
+
+        mat-expansion-panel {
+          mat-expansion-panel-header {
+            font-family: $body-font-ar;
+            font-weight: $font-reg;
+
+            .menu-icon {
+              margin-left: 8px;
+              margin-right: 0;
+            }
+          }
+
+          .mat-expansion-panel-body {
+            padding-left: 0;
+            padding-right: 26px;
+          }
+
+          .mdc-list-item__primary-text {
+            &:before {
+              @include border-radius(50%);
+              margin-right: 0;
+              margin-left: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.menu-icon {
+  width: 24px; /* Set a fixed width for icons */
+  height: 24px; /* Set a fixed height for icons */
+  margin-right: 10px; /* Add some spacing between icon and label */
+  i {
+    font-size: 20px;
+    margin-inline-end: 10px;
+  }
+}
+
+.menu-label {
+  flex: 1; /* Take up remaining space */
+}
+
+.sidebar-menu {
+  overflow-y: hidden;
+  max-height: 100%; // Adjust this according to your layout
+
+  &:hover {
+    overflow-y: auto;
+  }
+}

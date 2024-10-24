@@ -1,0 +1,52 @@
+<app-table-filters pageTitle="{{ 'ClamSubjectS_TITLE' | translate }}" [showSearchFiltre]="false" buttonText="{{ 'ADD_NEW_ClamSubject' | translate }}" [showDateFilter]="false" buttonLink="/admin/claim-subject/claim-add" [showAdditionalButton]="true"></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="ClamSubjectId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAM_ID' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ClamSubjectId}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ClamSubjectNameEN">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAM_NAME_EN' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ClamSubjectNameEN}} </mat-cell>
+      </ng-container>
+
+   
+      <ng-container matColumnDef="ClamSubjectNameAR">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAM_NAME_AR' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ClamSubjectNameAR}} </mat-cell>
+      </ng-container>
+
+    
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="d-flex justify-content-end"> {{ 'ACTIONS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon aria-hidden="false" aria-label="more icon" fontIcon="more_vert"></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item class="menu-link" [routerLink]="['/admin/claim-subject/claim-edit/', element.ClamSubjectId]">{{ 'EDIT' | translate }}</button>
+            <button mat-menu-item class="menu-link danger-text" (click)="deleteClamSubject(element.ClamSubjectId)">{{ 'DELETE' | translate }}</button>
+          </mat-menu>
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="dataSource.paginator?.length"
+    (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>
+

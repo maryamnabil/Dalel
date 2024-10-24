@@ -1,0 +1,29 @@
+<app-table-filters
+  pageTitle="{{ 'COMPANY_RATING' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<!-- RATING COLUMN -->
+<ng-template #ratingTemplate let-element>
+  <app-star-rating [rating]="element?.rate"></app-star-rating>
+</ng-template>
+<app-table
+  [showActions]="false"
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

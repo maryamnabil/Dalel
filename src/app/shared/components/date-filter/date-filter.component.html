@@ -1,0 +1,17 @@
+<div class="date-filter d-flex align-items-center">
+  <mat-form-field>
+    <mat-label>{{ 'DATE_FROM' | translate }}</mat-label>
+    <input matInput [(ngModel)]="startDate" [matDatepicker]="startDatePicker" (click)="startDatePicker.open()">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"><img matDatepickerToggleIcon src="/assets/images/icons/calendar.svg" alt="Calendar Icon" /></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'DATE_TO' | translate }}</mat-label>
+    <input matInput [(ngModel)]="endDate" [matDatepicker]="endDatePicker" (click)="endDatePicker.open()">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"><img matDatepickerToggleIcon src="/assets/images/icons/calendar.svg" alt="Calendar Icon" /></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <button class="btn btn-secondary" (click)="onDateChanged()">{{ 'SEARCh_BTN' | translate }}</button>
+</div>

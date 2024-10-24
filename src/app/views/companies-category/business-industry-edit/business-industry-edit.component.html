@@ -1,0 +1,86 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'EDIT_BUSINESS_INDUSTRY_CATEGORY' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="form">
+      <div class="row align-items-center g-5">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="nameAr" class="form-label"
+              >{{ "BUSINESS_INDUSTRY_CATEGORY_IN_ARABIC" | translate }} *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nameAr"
+              formControlName="nameAr"
+              name="nameAr"
+              placeholder="{{
+                'BUSINESS_INDUSTRY_CATEGORY_IN_ARABIC' | translate
+              }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2 no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('nameAr')?.hasError('required')"
+            >
+              {{ "CATEGORY_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="name" class="form-label"
+              >{{
+                "BUSINESS_INDUSTRY_CATEGORY_IN_ENGLISH" | translate
+              }}
+              *</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              name="name"
+              placeholder="{{
+                'BUSINESS_INDUSTRY_CATEGORY_IN_ENGLISH' | translate
+              }}"
+              required
+            />
+            <div
+              class="error-messages no-spacing mt-2"
+              *ngIf="formSubmitted && form.get('name')?.hasError('required')"
+            >
+              {{ "CATEGORY_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-5 col-12">
+          <div class="form-group">
+            <app-file-uploader
+              [title]="'CATEGORY_PHOTO' | translate"
+              formControlName="photoPath"
+            ></app-file-uploader>
+            <div
+              class="error-messages mt-2 no-spacing"
+              *ngIf="
+                formSubmitted && form.get('photoPath')?.hasError('required')
+              "
+            >
+              {{ "CATEGORY_PHOTO_REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'SUBMIT' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

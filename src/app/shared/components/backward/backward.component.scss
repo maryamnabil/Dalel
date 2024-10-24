@@ -1,0 +1,46 @@
+@import "../../../../assets/variables.scss";
+
+.backward-content {
+  margin-bottom: calc($spacing * 2);
+  .back-btn {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    height: 24px;
+    .mat-icon {
+      color: $primary;
+      &:hover {
+        color: $secondary;
+      }
+    }
+
+    .back-right-arrow {
+      display: none;
+    }
+  }
+
+  span {
+    color: $text-grey;
+    font-size: $font-lg;
+    text-transform: uppercase;
+    margin: 0 24px;
+  }
+}
+
+/* Arabic Styles */
+body.arabic {
+  :host {
+
+    .back-btn {
+      .back-left-arrow {
+        display: none;
+      }
+
+      .back-right-arrow {
+        display: block;
+      }
+    }
+
+  }
+}

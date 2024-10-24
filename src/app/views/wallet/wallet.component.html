@@ -1,0 +1,185 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div>
+      <app-title-status-card
+        [title]="'TOTAL_RECHARGES'"
+        [number]="counterData?.total_Recharges ?? 0"
+      >
+        <ng-container [ngTemplateOutlet]="totalRecharegesIcon"></ng-container>
+      </app-title-status-card>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div>
+      <app-title-status-card
+        [title]="'TOTAL_AMOUNT'"
+        [number]="counterData?.total_Amount ?? 0 + ' ' + ('SR' | translate)"
+      >
+        <ng-container [ngTemplateOutlet]="totalAmountIcon"></ng-container>
+      </app-title-status-card>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div>
+      <app-title-status-card
+        [title]="'CURRENT_AMOUNT'"
+        [number]="counterData?.currenr_Amount ?? 0 + ' ' + ('SR' | translate)"
+      >
+        <ng-container [ngTemplateOutlet]="currentAmountIcon"></ng-container>
+      </app-title-status-card>
+    </div>
+  </div>
+</div>
+
+<app-table-filters
+  pageTitle="{{ 'WALLET' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showDateFilter]="false"
+  [showExportBtn]="true"
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>
+
+<ng-template #totalRecharegesIcon>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="4" fill="#132742" />
+    <path
+      d="M29 32.5H19C16 32.5 14 31 14 27.5V20.5C14 17 16 15.5 19 15.5H29C32 15.5 34 17 34 20.5V27.5C34 31 32 32.5 29 32.5Z"
+      stroke="#1771E2"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M24 27C25.6569 27 27 25.6569 27 24C27 22.3431 25.6569 21 24 21C22.3431 21 21 22.3431 21 24C21 25.6569 22.3431 27 24 27Z"
+      stroke="#1771E2"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M17.5 21.5V26.5"
+      stroke="#1771E2"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M30.5 21.5V26.5"
+      stroke="#1771E2"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #totalAmountIcon>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="4" fill="#093F15" />
+    <path
+      d="M30.04 25.55C29.62 25.96 29.38 26.55 29.44 27.18C29.53 28.26 30.52 29.05 31.6 29.05H33.5V30.24C33.5 32.31 31.81 34 29.74 34H19.63C19.94 33.74 20.21 33.42 20.42 33.06C20.79 32.46 21 31.75 21 31C21 28.79 19.21 27 17 27C16.06 27 15.19 27.33 14.5 27.88V23.51C14.5 21.44 16.19 19.75 18.26 19.75H29.74C31.81 19.75 33.5 21.44 33.5 23.51V24.95H31.48C30.92 24.95 30.41 25.17 30.04 25.55Z"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M14.5 24.41V19.84C14.5 18.65 15.23 17.59 16.34 17.17L24.28 14.17C25.52 13.7 26.85 14.62 26.85 15.95V19.75"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M34.5588 25.9702V28.0302C34.5588 28.5802 34.1188 29.0302 33.5588 29.0502H31.5988C30.5188 29.0502 29.5288 28.2602 29.4388 27.1802C29.3788 26.5502 29.6188 25.9602 30.0388 25.5502C30.4088 25.1702 30.9188 24.9502 31.4788 24.9502H33.5588C34.1188 24.9702 34.5588 25.4202 34.5588 25.9702Z"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M19 24H26"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M21 31C21 31.75 20.79 32.46 20.42 33.06C20.21 33.42 19.94 33.74 19.63 34C18.93 34.63 18.01 35 17 35C15.54 35 14.27 34.22 13.58 33.06C13.21 32.46 13 31.75 13 31C13 29.74 13.58 28.61 14.5 27.88C15.19 27.33 16.06 27 17 27C19.21 27 21 28.79 21 31Z"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M15.4414 30.9995L16.4314 31.9895L18.5614 30.0195"
+      stroke="#22E14C"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #currentAmountIcon>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="4" fill="#402721" />
+    <path
+      d="M30.5 24.65V28.35C30.5 31.47 27.59 34 24 34C20.41 34 17.5 31.47 17.5 28.35V24.65C17.5 27.77 20.41 30 24 30C27.59 30 30.5 27.77 30.5 24.65Z"
+      stroke="#DF493F"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M30.5 19.65C30.5 20.56 30.25 21.4 29.81 22.12C28.74 23.88 26.54 25 24 25C21.46 25 19.26 23.88 18.19 22.12C17.75 21.4 17.5 20.56 17.5 19.65C17.5 18.09 18.23 16.68 19.4 15.66C20.58 14.63 22.2 14 24 14C25.8 14 27.42 14.63 28.6 15.65C29.77 16.68 30.5 18.09 30.5 19.65Z"
+      stroke="#DF493F"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M30.5 19.65V24.65C30.5 27.77 27.59 30 24 30C20.41 30 17.5 27.77 17.5 24.65V19.65C17.5 16.53 20.41 14 24 14C25.8 14 27.42 14.63 28.6 15.65C29.77 16.68 30.5 18.09 30.5 19.65Z"
+      stroke="#DF493F"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</ng-template>

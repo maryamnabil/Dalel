@@ -1,0 +1,85 @@
+<form [formGroup]="announcementAddForm">
+  <div class="row">
+    <div class="col-7 mb-5 form-group">
+      <label for="subject" class="form-label"
+        >{{ "SUBJECT" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="subject"
+        formControlName="subject"
+        placeholder="{{ 'SUBJECT' | translate }} *"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted &&
+          announcementAddForm.get('subject')?.hasError('required')
+        "
+      >
+        {{ "SUBJECT_IS_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-9 mb-5 form-group">
+      <label for="message" class="form-label"
+        >{{ "MESSAGE" | translate }} *</label
+      >
+      <textarea
+        class="form-control"
+        id="message"
+        formControlName="message"
+        placeholder="{{ 'MESSAGE' | translate }} *"
+        required
+      ></textarea>
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted &&
+          announcementAddForm.get('message')?.hasError('required')
+        "
+      >
+        {{ "MESSAGE_IS_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-5 mb-5">
+      <mat-label>{{ "SELECT_USERS" | translate }}</mat-label>
+      <mat-select formControlName="userIds" multiple>
+        <mat-option *ngFor="let artist of artists" [value]="artist.id">
+          {{ artist.fullName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="col-4 mb-5 form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="sendToAllUsers"
+          formControlName="sendToAllUsers"
+          (change)="onCheckboxChange($event)"
+        />
+        <label class="form-check-label" for="sendToAllUsers">
+          {{ "SEND_TO_ALL_USERS" | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary" (click)="submitForm()">
+      {{ "SUBMIT" | translate }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">
+      {{ "CANCEL" | translate }}
+    </button>
+  </div>
+</form>

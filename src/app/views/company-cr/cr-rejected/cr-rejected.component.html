@@ -1,0 +1,25 @@
+<app-table-filters
+  pageTitle="{{ 'COMPANY_REGISTRATIONS_CR_REJECTED' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

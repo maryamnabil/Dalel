@@ -1,0 +1,46 @@
+@import "../../../../assets/variables.scss";
+
+.reject-popup {
+  .rejection-reason {
+    label {
+      font-size: $font-lg;
+      margin-bottom: calc($spacing/2);
+      color: $bg-darker;
+      display: block;
+      font-family: $body-font;
+    }
+
+    .form-control {
+      @include border-radius(8px);
+      background: $border-grey;
+      height: 100px;
+      &::placeholder {
+        color: $placeholder-grey;
+        font-family: $body-font;
+        font-size: $body-size;
+      }
+    }
+  }
+
+}
+
+body.arabic {
+  :host {
+
+    .reject-popup {
+      .rejection-reason {
+        label {
+          font-family: $body-font-ar;
+        }
+
+        .form-control {
+          &::placeholder {
+            font-family: $body-font-ar;
+          }
+        }
+      }
+
+    }
+
+  }
+}

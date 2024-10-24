@@ -1,0 +1,55 @@
+<div class="container" [dir]="currentLanguage === 'en' ? 'ltr' : 'rtl'">
+  <div class="popup-container p-4 rounded-20">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>{{ 'CLAIM_DETAILS' | translate }}</h2>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closePopup()"></button>
+    </div>
+
+    <div class="row mt-3">
+      <!-- LEFT SIDE -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <strong class="text-secondary">{{ 'USER_NAME' | translate }}</strong>
+        </div>
+        <div class="mb-3">
+          <span>{{ claim?.user?.name }}</span>
+        </div>
+
+        <div class="mb-3">
+          <strong class="text-secondary">{{ 'STATUS' | translate }}</strong>
+          <div class="d-flex align-items-center">
+            <span [ngClass]="{'badge': true, 'bg-success': !claim?.isClosed, 'bg-danger': claim?.isClosed}">
+              {{ claim?.isClosed ? ('CLOSED' | translate) : ('OPENED' | translate) }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <strong class="text-secondary">{{ 'MESSAGE_DATE' | translate }}</strong>
+        </div>
+        <div class="mb-3">
+          <span>{{ claim?.createdOn | date:'MMM d, y' }}</span>
+        </div>
+
+        <div class="mb-3">
+          <strong class="text-secondary">{{ 'CHANGE_STATUS' | translate }}</strong>
+          <select title="isClosed" [(ngModel)]="claim.isClosed" (change)="onStatusChange($event)" class="form-select rounded-20" style="width: 150px;">
+            <option [value]="false">{{ 'OPENED' | translate }}</option>
+            <option [value]="true">{{ 'CLOSED' | translate }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- NORMAL SIDE -->
+    <div class="mb-3">
+      <strong class="text-secondary">{{ 'Message_CONTENT' | translate }}</strong>
+    </div>
+    <div class="mb-3">
+      <span>{{ claim?.message }}</span>
+    </div>
+  </div>
+</div>

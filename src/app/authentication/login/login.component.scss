@@ -1,0 +1,65 @@
+@import "../../../assets/variables.scss";
+
+.login-page {
+  background: $bg-darker;
+  min-height: 100vh;
+  padding: $spacing;
+  .login-card {
+    @include border-radius (8px);
+    min-width: 550px;
+    max-width: 550px;
+    background: $bg-light;
+    padding: calc($spacing*4);
+
+    @media screen and (max-width: $break-md) {
+      min-width: 100%;
+      padding: calc($spacing*2);
+    }
+
+    h2 {
+      font-size: $font-xxl;
+    }
+
+    h2, p {
+      color: $white;
+    }
+
+    .forgot-password {
+      text-decoration: none;
+      font-size: $font-md;
+    }
+  }
+}
+
+.password-input {
+  position: relative;
+  .show-hide-password {
+    position: absolute;
+    right: $spacing;
+    top: 9px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: $placeholder-grey;
+  }
+}
+
+.form-group .error-messages {
+  left: 0;
+}
+
+body.arabic {
+  :host {
+    .password-input {
+      .show-hide-password {
+        left: $spacing;
+        right: auto;
+      }
+    }
+
+    .form-group .error-messages {
+      left: auto;
+      right: 0;
+    }
+  }
+}

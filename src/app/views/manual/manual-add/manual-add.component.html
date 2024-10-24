@@ -1,0 +1,21 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'ADD_MANUAL_TITLE' | translate }}"
+    backwardLink="/admin/manual/manuals"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="ManualAddForm">
+      <app-maual-form
+        [manualForm]="ManualAddForm"
+        [formSubmitted]="formSubmitted"
+      ></app-maual-form>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'CREATE_MANUAL' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

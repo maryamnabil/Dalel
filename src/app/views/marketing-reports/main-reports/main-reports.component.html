@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div style="background-color: #212529; padding: 1rem; border-radius: 4px">
+      <app-charts
+        [id]="'my-chart'"
+        [data]="newRegisteredChart"
+        [title]="'NEW_REGISTERED_USERS' | translate"
+        (dataChangeEvent)="newRegisteredDateChanged($event)"
+      ></app-charts>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div style="background-color: #212529; padding: 1rem; border-radius: 4px">
+      <app-charts
+        [id]="'my-chart2'"
+        [title]="'REGISTERED_USERS_WITH_LOCATION' | translate"
+        [data]="registeredWithLocationChart"
+        (dataChangeEvent)="registeredWithLocationDateChanged($event)"
+      ></app-charts>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div style="background-color: #212529; padding: 1rem; border-radius: 4px">
+      <app-charts
+        [id]="'my-chart3'"
+        [title]="'REGISTERED_USERS_WITH_CATEGORY' | translate"
+        [data]="registeredWithCategoryChart"
+        (dataChangeEvent)="registeredWithCategoryDateChanged($event)"
+      ></app-charts>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div style="background-color: #212529; padding: 1rem; border-radius: 4px">
+      <app-charts
+        [id]="'my-chart4'"
+        [title]="'PROJECTS_BY_CATEGORY' | translate"
+        [data]="projectByCategoryChart"
+        (dataChangeEvent)="projectByCategoryDateChanged($event)"
+      ></app-charts>
+    </div>
+  </div>
+</div>

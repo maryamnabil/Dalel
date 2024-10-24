@@ -1,0 +1,65 @@
+<div class="user-card bg-dark page-content mb-4">
+  <div
+    class="d-flex align-item-center gap-3 flex-wrap"
+    style="vertical-align: middle"
+  >
+    <app-backward
+      linkText="{{ 'COMPANY_DETAILS' | translate }}"
+      [backwardLink]="backUrl"
+    ></app-backward>
+    <app-star-rating [rating]="companyDetails?.rating"></app-star-rating>
+  </div>
+  <app-company-details
+    [companyDetails]="companyDetails"
+    [userWallet]="userWallet"
+    [isApproved]="true"
+    (recharge)="onRecharge()"
+  ></app-company-details>
+</div>
+
+<!-- Projects History Table -->
+<app-table-filters
+  pageTitle="{{ 'PROJECT_HISTORY' | translate }}"
+  (SearchChanged)="onSearchProjecstHistory($event)"
+  [showDateFilter]="false"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+>
+</app-table-filters>
+
+<!-- Status Column -->
+<ng-template #statusColumn let-element>
+  <div class="status pending-status">in-progress</div>
+</ng-template>
+
+<app-table
+  [tableConfig]="projectsTableConfig"
+  [responseData]="projectsResponseData"
+  [pageSize]="projectPageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [viewDetailsUrl]="'/admin/projects/details'"
+  (onPageChangeEvt)="onProjectsPageChanged($event)"
+>
+</app-table>
+
+<!-- Posted Biddings Table -->
+<app-table-filters
+  pageTitle="{{ 'POSTED_BIDDINGS' | translate }}"
+  (SearchChanged)="onSearchBiddings($event)"
+  [showDateFilter]="false"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="biddingsTableConfig"
+  [responseData]="biddingsResponseData"
+  [pageSize]="biddingsPageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [viewDetailsUrl]="'/admin/projects/details/'"
+  (onPageChangeEvt)="onBiddingsPageChanged($event)"
+>
+</app-table>

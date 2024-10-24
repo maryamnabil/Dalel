@@ -1,0 +1,97 @@
+<!-- promo-form.component.html -->
+<div [formGroup]="questionForm">
+  <!-- Name -->
+  <div class="row">
+    <div class="col-5 mb-5 form-group">
+      <label for="promoCode" class="form-label"
+        >{{ "Question_EN" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="question"
+        formControlName="question"
+        placeholder="{{ 'Question_EN' | translate }}"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && questionForm.get('question')?.hasError('required')
+        "
+      >
+        {{ "Question_EN_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Name Ar -->
+  <div class="row">
+    <div class="col-5 mb-5 form-group">
+      <label for="nameAr" class="form-label"
+        >{{ "Question_AR" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="questionAr"
+        formControlName="questionAr"
+        placeholder="{{ 'Question_AR' | translate }}"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && questionForm.get('questionAr')?.hasError('required')
+        "
+      >
+        {{ "Question_AR_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+  <div formArrayName="answers">
+    <div
+      class="row"
+      *ngFor="let answer of answers().controls; let i = index"
+      [formGroupName]="i"
+    >
+      <!-- Name -->
+      <div class="col-4 mb-5 form-group">
+        <label for="promoCode" class="form-label"
+          >{{ "Answer_EN" | translate }} *</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          placeholder="{{ 'ANSWER_EN' | translate }}"
+          required
+        />
+      </div>
+
+      <!-- Name Ar -->
+      <div class="col-4 mb-5 form-group">
+        <label for="nameAr" class="form-label"
+          >{{ "Answer_AR" | translate }} *</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="nameAr"
+          formControlName="nameAr"
+          placeholder="{{ 'Answer_AR' | translate }}"
+          required
+        />
+      </div>
+      <div class="col-4 d-flex btn-div">
+        <button (click)="removeAnswer(i)" class="btn btn-danger">
+          {{ "DELETE" | translate }}
+        </button>
+        <button type="button" (click)="addAnswer()" class="btn btn-primary">
+          {{ "ADD" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

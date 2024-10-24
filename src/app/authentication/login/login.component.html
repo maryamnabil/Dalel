@@ -1,0 +1,118 @@
+<div class="login-page d-flex align-items-center justify-content-center">
+  <div class="login-content d-flex align-items-center flex-column w-100">
+    <!-- <div class="app-logo mb-5">
+      <img src="../assets/images/yamam-logo.svg" width="100" alt="Yamam Logo"/>
+    </div> -->
+
+    <div class="login-card">
+      <div class="mb-5">
+        <h2 class="text-center">{{ "WELCOME_BACK" | translate }}</h2>
+        <p class="text-center">{{ "SIGNIN_SUBTITLE" | translate }}</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-5 form-group">
+          <label for="useremail" class="form-label"
+            >{{ "EMAIL_LABEL" | translate }} *</label
+          >
+          <input
+            type="email"
+            id="useremail"
+            class="form-control"
+            formControlName="useremail"
+            placeholder="{{ 'EMAIL_LABEL' | translate }}"
+            required
+          />
+          <div
+            *ngIf="
+              useremail?.invalid && (useremail?.dirty || useremail?.touched)
+            "
+            class="error-messages"
+          >
+            <div *ngIf="useremail?.errors?.required">
+              {{ "EMAIL_REQUIRED" | translate }}
+            </div>
+            <div *ngIf="useremail?.errors?.pattern">
+              {{ "INVALID_EMAIL" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-5 form-group">
+          <div class="d-flex justify-content-between">
+            <label for="password" class="form-label"
+              >{{ "PASSWORD_LABEL" | translate }} *</label
+            >
+          </div>
+
+          <div class="password-input">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              class="form-control"
+              formControlName="password"
+              id="password"
+              name="password"
+              placeholder="{{ 'PASSWORD_PLACEHOLDER' | translate }}"
+              required
+            />
+            <button
+              class="show-hide-password"
+              type="button"
+              (click)="togglePasswordVisibility()"
+            >
+              <mat-icon
+                *ngIf="showPassword"
+                aria-hidden="false"
+                aria-label="Hide Password icon"
+                fontIcon="visibility"
+              ></mat-icon>
+              <mat-icon
+                *ngIf="!showPassword"
+                aria-hidden="false"
+                aria-label="Show Password icon"
+                fontIcon="visibility_off"
+              ></mat-icon>
+            </button>
+          </div>
+
+          <div
+            *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+            class="error-messages"
+          >
+            <div *ngIf="password?.errors?.required">
+              {{ "PASSWORD_REQUIRED" | translate }}
+            </div>
+            <div *ngIf="password?.errors?.minlength">
+              {{ "INVALID_PASSWORD" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="remember-me mb-2">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
+              #rememberMe
+            />
+            <label class="form-check-label" for="rememberMe">{{
+              "REMEMBER_ME" | translate
+            }}</label>
+          </div>
+        </div>
+
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="loginForm.invalid"
+          >
+            {{ "SIGN_IN" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<app-table-filters
+  pageTitle="{{ 'DEPARTMENTS_TITLE' | translate }}"
+  buttonText="{{ 'ADD_NEW_DEPARTMENT' | translate }}"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  buttonLink="/admin/settings/department-add"
+  [showAdditionalButton]="true"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="departmentName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "DEPT_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let element"
+        class="link"
+        [routerLink]="['/admin/settings/roles', element.departmentId]"
+      >
+        {{ element.departmentName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="employeesCount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "DEPT_EMPLOYEES" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.employeesCount }} {{ "EMPLOYER" | translate }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+      >
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/department-edit/',
+                element.departmentId
+              ]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="deleteDepartment(element.departmentId)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [length]="totalRecords"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

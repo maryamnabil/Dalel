@@ -1,0 +1,10 @@
+<div class="report-block d-flex align-items-center justify-content-between">
+  <div>
+    <div class="block-title">{{ title }}</div>
+    <div class="block-number">{{ number }}</div>
+    <p class="m-0" *ngIf="showViewAll"><a [routerLink]="link">{{ 'VIEW_ALL' | translate }}</a></p>
+    <p class="m-0" *ngIf="showPercentage"><Span>{{ percentage }}</Span> {{ 'PREVIOUS_MONTH' | translate }}</p>
+  </div>
+  <img src="{{ icon }}" alt="" />
+</div>
+

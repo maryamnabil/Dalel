@@ -1,0 +1,140 @@
+<app-table-filters
+  pageTitle="{{ 'ORDERS_TO_PAY' | translate }}"
+  [showAdditionalButton]="false"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- <ng-container matColumnDef="selectAll">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox #selectAllCheckbox (change)="selectAllRows(selectAllCheckbox.checked)"></mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-checkbox [checked]="selectAllCheckbox.checked" (change)="selectRow($event, element.FileId, selectAllCheckbox.checked)"></mat-checkbox>
+      </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="FileId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        # {{ "FILE_ID" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.FileId }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="FileName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "FILE_NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let element"
+        class="text-link text-bold text-underline"
+        [routerLink]="[
+          '/admin/accounting/orderInGroup',
+          element.FileId,
+          element.FileName
+        ]"
+        >{{ element.FileName }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfOrders">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "NUMBER_OF_ORDERS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.numberOfOrders
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="createdOn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "CREATED_ON" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.createdOn }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fromDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "FROM_DATE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.fromDate }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="toDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "TO_DATE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.toDate }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PRICE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.price }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="commission">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "COMMISSION" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.commission }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PAYMENT_STATUS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span
+          class="status"
+          [ngClass]="
+            element.paymentStatus === 'Paid'
+              ? 'active-status'
+              : 'inactive-status'
+          "
+        >
+          {{ element.paymentStatus | translate }}
+        </span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="order-actions">
+          <button
+            class="btn btn-dark btn-sm"
+            [routerLink]="[
+              '/admin/accounting/orderInGroup',
+              element.FileId,
+              element.FileName
+            ]"
+          >
+            {{ "VIEW" | translate }}
+          </button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  ></mat-paginator>
+</div>

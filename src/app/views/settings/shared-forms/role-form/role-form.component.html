@@ -1,0 +1,11 @@
+<div [formGroup]="roleForm">
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="roleName" class="form-label">{{ 'ROLE_NAME' | translate }} *</label>
+      <input type="text" class="form-control" id="roleName" formControlName="roleName" name="roleName" placeholder="{{ 'ROLE_NAME' | translate }} *" required>
+      <div class="error-messages" *ngIf="formSubmitted && roleForm.get('roleName')?.hasError('required')">
+        {{'NAME_REQUIRED' | translate}}
+      </div>
+    </div>
+  </div>
+</div>

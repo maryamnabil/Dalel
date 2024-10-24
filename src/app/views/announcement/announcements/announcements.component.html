@@ -1,0 +1,80 @@
+<app-table-filters
+  pageTitle="{{ 'ANNOUNCEMENTS_TITLE' | translate }}"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  buttonText="{{ 'ADD_NEW_Announcement' | translate }}"
+  buttonLink="/admin/announcement/announcement-add"
+  [showAdditionalButton]="true"
+>
+</app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="ID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "ID" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.ID }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Subject">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "Subject" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.Subject }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="UsersNames">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "UsersNames" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.UsersNames }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="SendOn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "SendOn" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.SendOn }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+      >
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <button
+          type="button"
+          class="text-white btn btn-dark btn btn-outline-secondary"
+          (click)="viewDetails(element.ID)"
+        >
+          {{ "VIEW_DETAILS" | translate }}
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

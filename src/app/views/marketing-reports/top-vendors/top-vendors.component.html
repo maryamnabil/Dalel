@@ -1,0 +1,23 @@
+<app-table-filters
+  pageTitle="{{ 'TOP_VENDORS' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showActions]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

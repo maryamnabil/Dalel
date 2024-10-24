@@ -1,0 +1,128 @@
+<form [formGroup]="inboxAddForm">
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="titleEn" class="form-label"
+        >{{ "TITLE_EN" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="titleEn"
+        formControlName="titleEn"
+        placeholder="{{ 'TITLE_EN' | translate }} *"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && inboxAddForm.get('titleEn')?.hasError('required')
+        "
+      >
+        {{ "TITLE_EN_REQUIRED" | translate }}
+      </div>
+    </div>
+
+    <div class="col-4 mb-5 form-group">
+      <label for="titleAr" class="form-label"
+        >{{ "TITLE_AR" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="titleAr"
+        formControlName="titleAr"
+        placeholder="{{ 'TITLE_AR' | translate }} *"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && inboxAddForm.get('titleAr')?.hasError('required')
+        "
+      >
+        {{ "TITLE_AR_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-9 mb-5 form-group">
+      <label for="message" class="form-label"
+        >{{ "MESSAGE_EN" | translate }} *</label
+      >
+      <textarea
+        class="form-control"
+        id="message"
+        formControlName="message"
+        placeholder="{{ 'MESSAGE_EN' | translate }} *"
+        required
+      ></textarea>
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && inboxAddForm.get('message')?.hasError('required')
+        "
+      >
+        {{ "MESSAGE_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-9 mb-5 form-group">
+      <label for="messageAr" class="form-label"
+        >{{ "MESSAGE_AR" | translate }} *</label
+      >
+      <textarea
+        class="form-control"
+        id="messageAr"
+        formControlName="messageAr"
+        placeholder="{{ 'MESSAGE_AR' | translate }} *"
+        required
+      ></textarea>
+      <div
+        class="error-messages"
+        *ngIf="
+          formSubmitted && inboxAddForm.get('messageAr')?.hasError('required')
+        "
+      >
+        {{ "MESSAGE_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-7 mb-5 custom-mat-select">
+      <mat-label>{{ "SELECT_USERS" | translate }}</mat-label>
+      <mat-select formControlName="userIds" multiple>
+        <mat-option *ngFor="let artist of artists" [value]="artist.id">
+          {{ artist.fullName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="col-4 mb-5 form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="sendToAllUsers"
+          formControlName="sendToAllUsers"
+          (change)="onCheckboxChange($event)"
+        />
+        <label class="form-check-label" for="sendToAllUsers">
+          {{ "SEND_TO_ALL_USERS" | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn btn-primary ml-4" (click)="submitForm()">
+      {{ "SUBMIT" | translate }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">
+      {{ "CANCEL" | translate }}
+    </button>
+  </div>
+</form>

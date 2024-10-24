@@ -1,0 +1,49 @@
+<!-- promo-form.component.html -->
+<div [formGroup]="promoForm">
+    <!-- Promo Code -->
+    <div class="row">
+      <div class="col-5 mb-5 form-group">
+        <label for="promoCode" class="form-label">{{ 'PROMO_CODE' | translate }} *</label>
+        <input type="text" class="form-control" id="promoCode" formControlName="promoCode" placeholder="{{ 'PROMO_CODE' | translate }}" required>
+        <div class="error-messages" *ngIf="formSubmitted && promoForm.get('promoCode')?.hasError('required')">
+          {{ 'PROMO_CODE_REQUIRED' | translate }}
+        </div>
+      </div>
+    </div>
+  
+        <div class="row mb-5 date-filter col-5">
+            <div class=" mb-1 form-group">
+              <label for="VALID_FROM" class="form-label">{{ 'VALID_FROM' | translate }} *</label>
+            </div>
+            <mat-form-field>
+                <mat-label>{{ 'VALID_FROM' | translate }}</mat-label>
+                <input title="VALID_FROM" matInput [matDatepicker]="validfrom" formControlName="validFrom" (click)="validfrom.open()">
+                <mat-datepicker-toggle matSuffix [for]="validfrom"><img matDatepickerToggleIcon src="/assets/images/icons/calendar.svg" alt="Calendar Icon" /></mat-datepicker-toggle>
+                <mat-datepicker #validfrom></mat-datepicker>
+              </mat-form-field>
+        </div>
+      
+        <div class="row mb-5 date-filter col-5">
+            <div class=" mb-1 form-group">
+              <label for="validTo" class="form-label">{{ 'VALID_FROM' | translate }} *</label>
+            </div>
+            <mat-form-field >
+                <mat-label>{{ 'VALID_TO' | translate }}</mat-label>
+                <input title="VALID_TO" matInput [matDatepicker]="validto" formControlName="validTo" (click)="validto.open()">
+                <mat-datepicker-toggle matSuffix [for]="validto"><img matDatepickerToggleIcon src="/assets/images/icons/calendar.svg" alt="Calendar Icon" /></mat-datepicker-toggle>
+                <mat-datepicker #validto></mat-datepicker>
+              </mat-form-field>
+      </div>
+
+    <div class="row">
+      <div class="col-5 mb-5 form-group">
+        <label for="discountPercentage" class="form-label">{{ 'DISCOUNT_PERCENTAGE' | translate }} *</label>
+        <input type="number" class="form-control" id="discountPercentage" formControlName="discountPercentage" name="discountPercentage" placeholder="{{ 'DISCOUNT_PERCENTAGE' | translate }}" required>
+        <div class="error-messages" *ngIf="formSubmitted && promoForm.get('discountPercentage')?.hasError('required')">
+          {{ 'DISCOUNT_PERCENTAGE_REQUIRED' | translate }}
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  

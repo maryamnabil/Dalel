@@ -1,0 +1,69 @@
+<app-table-filters pageTitle="{{ 'CLAIM_TITLE' | translate }}" 
+                   (SearchChanged)="onSearchChanged($event)"
+                   [showAdditionalButton]="false"
+                   [showIsClosed]="true"    
+                   (ChangeStatus)="onStatusChange($event)"             
+                (dateRangeChanged)="onDateRangeFilterApplied({ fromDate: $event.startDate, toDate: $event.endDate })">                
+</app-table-filters>
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="User">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAIM_USER' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.User}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Message">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAIM_MSG' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.Message }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAIM_STATUS' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">  {{ element.Status ? 'Closed' : 'Opened' }} </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="Subject">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CLAIM_SUBJECT' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.Subject}} </mat-cell>
+      </ng-container>
+  
+    
+    <!-- Created Date Column -->
+    <ng-container matColumnDef="MessageDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'MSG_DATE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.MessageDate}} </mat-cell>
+    </ng-container>
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="d-flex justify-content-end"> {{ 'ACTIONS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon aria-hidden="false" aria-label="more icon" fontIcon="more_vert"></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item class="menu-link danger-text" (click)="ViewDetails(element.ClaimId)">{{ 'VIEW_DETAILS' | translate }}</button>
+          </mat-menu>
+        </div>
+
+      </mat-cell>
+    </ng-container>
+  
+    <!-- Header and Row Definitions -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </mat-table>
+  
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)">
+  </mat-paginator>
+</div>

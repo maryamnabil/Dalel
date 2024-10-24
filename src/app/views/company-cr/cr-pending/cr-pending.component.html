@@ -1,0 +1,37 @@
+<app-table-filters
+  pageTitle="{{ 'COMPANY_REGISTRATIONS_CR_PENDING' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<!-- APPROVE - DECLINE COLUMNS -->
+<ng-template #approveDeclineActionBtns let-element>
+  <div class="d-flex gap-3">
+    <button (click)="onApprove(element)" class="btn btn-primary">
+      {{ "APPROVE" | translate }}
+    </button>
+    <button (click)="onDecline(element)" class="btn btn-danger">
+      {{ "DECLINE" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

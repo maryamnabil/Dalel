@@ -1,0 +1,63 @@
+<div class="user-card bg-dark page-content mb-4">
+  <app-backward
+    linkText="{{ 'NEW_DETAILS' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+
+  <!-- Attachments Part -->
+  <div class="card-info d-block mb-4">
+    <h6 class="mb-5">{{ "ATTACHMENT_FILES" | translate }}</h6>
+    <div class="attachments fs-6 g-4 row">
+      <div *ngFor="let attachment of details?.newsAttachments" class="col-xl-3">
+        <div>
+          <a
+            [href]="
+              details?.baseUrl + attachment?.attachmentsPath | secureUrl | async
+            "
+            class="attachment-item d-block text-white d-flex gap-3 align-items-center text-decoration-none"
+            target="_blank"
+          >
+            <i class="fas fa-file"></i>
+            <span class="max-3-lines">{{
+              getFileName(attachment?.attachmentsPath)
+            }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project details -->
+  <div class="project-details mb-4">
+    <div class="required-skills mb-4">
+      <h6 class="mb-2">{{ "NEWS_CATEGORY" | translate }}</h6>
+      <div class="info-area d-flex align-items-center bg-grey">
+        <span>{{ details?.newsCategory | localizedName | async }} </span>
+      </div>
+    </div>
+    <div class="required-skills mb-4">
+      <h6 class="mb-2">{{ "TITLE_EN" | translate }}</h6>
+      <div class="info-area d-flex align-items-center bg-grey">
+        <span>{{ details?.titleEn }} </span>
+      </div>
+    </div>
+    <div class="required-skills mb-4">
+      <h6 class="mb-2">{{ "TITLE_AR" | translate }}</h6>
+      <div class="info-area d-flex align-items-center bg-grey">
+        <span>{{ details?.titleAr }} </span>
+      </div>
+    </div>
+    <div class="description-en mb-4">
+      <h6 class="mb-2">{{ "DESC_NAME_EN" | translate }}</h6>
+      <div class="info-area bg-grey">
+        {{ details?.descriptionEn }}
+      </div>
+    </div>
+    <div class="description-ar">
+      <h6 class="mb-2">{{ "DESC_NAME_AR" | translate }}</h6>
+      <div dir="rtl" class="info-area bg-grey">
+        {{ details?.descriptionAr }}
+      </div>
+    </div>
+  </div>
+</div>

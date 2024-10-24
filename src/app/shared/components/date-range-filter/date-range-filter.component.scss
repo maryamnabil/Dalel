@@ -1,0 +1,100 @@
+@import "../../../../assets/variables.scss";
+
+.date-filter {
+  .filter-label {
+    font-size: 15px;
+    font-family: $body-font-secondary;
+    color: #bfbfbf;
+    margin-inline-end: calc($spacing/2);
+    font-weight: $font-reg;
+  }
+
+  ::ng-deep {
+    .mat-mdc-form-field {
+      .mat-mdc-text-field-wrapper {
+        @include border-radius(4px);
+        background: #262a2f;
+        padding: calc($spacing/2) 14px;
+        padding-right: 50px;
+        position: relative;
+
+        // Input
+        .mat-mdc-form-field-infix {
+          min-height: auto;
+          width: 150px;
+          padding: 0 !important;
+
+          .mat-date-range-input,
+          .mat-date-range-input-separator {
+            color: $white;
+            font-family: $body-font-secondary;
+            font-size: $font-sm;
+            font-weight: $font-reg;
+          }
+        }
+
+        // Icon
+        .mat-mdc-form-field-icon-prefix,
+        .mat-mdc-form-field-icon-suffix {
+          position: absolute;
+          padding: 0;
+          top: 0;
+          right: 0;
+
+          .mat-mdc-icon-button {
+            @include border-radius(4px);
+            background: $secondary;
+            color: $white;
+            width: 39px;
+            height: 39px;
+            padding: 0;
+          }
+        }
+      }
+
+      // Hint
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+/* Arabic Styles */
+body.arabic {
+  :host {
+    .date-filter {
+      .filter-label {
+        font-size: 15px;
+        font-family: $body-font-ar;
+        color: #bfbfbf;
+        margin-right: 0;
+      }
+
+      ::ng-deep {
+        .mat-mdc-form-field {
+          .mat-mdc-text-field-wrapper {
+            padding: calc($spacing/2) 14px;
+            padding-left: 50px;
+
+            // Input
+            .mat-mdc-form-field-infix {
+              .mat-date-range-input,
+              .mat-date-range-input-separator {
+                font-family: $body-font-ar;
+                font-size: $font-md;
+              }
+            }
+
+            // Icon
+            .mat-mdc-form-field-icon-prefix,
+            .mat-mdc-form-field-icon-suffix {
+              left: 0;
+              right: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<app-table-filters
+  pageTitle="{{ 'BLOCKED_COMPANY_REGISTRATIONS_CR' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<ng-template #removeBlocktTemplate let-element>
+  <a (click)="onRemoveBlock(element)" class="text-success text-underline">{{
+    "REMOVE_BLOCK" | translate
+  }}</a>
+</ng-template>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="false"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

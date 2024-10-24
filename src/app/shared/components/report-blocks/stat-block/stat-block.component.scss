@@ -1,0 +1,59 @@
+@import "../../../../../assets/variables.scss";
+
+
+.report-block {
+  @include border-radius (4px);
+  padding: 20px 30px;
+  background: $bg-light;
+  box-shadow: 0px 20px 60px 0px rgba(18, 20, 21, 0.30);
+
+  .block-title {
+    font-family: $body-font-secondary;
+    text-transform: uppercase;
+    color: $white;
+    line-height: 14px;
+  }
+
+  .block-number {
+    font-size: $font-xxl;
+    line-height: 34px;
+    margin-top: $spacing;
+    margin-bottom: 21px;
+  }
+
+  p {
+    font-weight: $font-reg;
+    color: $text-grey;
+    font-size: $font-sm;
+    font-family: $body-font-secondary;
+    span {
+      color: $cyan;
+    }
+
+    a {
+      color: $text-grey;
+      font-size: $font-md;
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+}
+
+body.arabic {
+  .report-block {
+
+    .block-title {
+      font-family: $body-font-ar;
+    }
+
+    p {
+      font-family: $body-font-ar;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,42 @@
+<div class="row" style="align-items: center;">
+  <h4 class="mb-sm-0 col-9">{{ 'Terms_and_Condations' | translate }}</h4>
+</div>
+<form [formGroup]="form" novalidate class="mb-3">
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3 col-12">
+        <label for="content" class="form-label">{{ 'Content_EN' | translate }}</label>
+        <editor formControlName="content" apiKey="2ydgh0ytvq8rrpxrd3dsi54bzqiso1qer8ks6gh7m1k4sc5n" [init]="editorConfig"></editor>
+        <div  *ngIf="formSubmitted && form.get('content')?.hasError('required')"  class="text-danger">
+          {{ 'Content_EN_REQUIRED' | translate }}
+        </div>
+      </div>
+      <div class="mb-3 col-12">
+        <label class="form-label">{{ 'Content_AR' | translate }}</label>
+        <editor  apiKey="2ydgh0ytvq8rrpxrd3dsi54bzqiso1qer8ks6gh7m1k4sc5n" formControlName="contentAr" [init]="editorConfig"></editor>
+        <div  *ngIf="formSubmitted && form.get('contentAr')?.hasError('required')"  class="text-danger">
+          {{ 'Content_AR_REQUIRED' | translate }}
+        </div>
+      </div>
+      <div class="mb-3 col-12">
+        <h5 class="fs-14 mb-1">{{ 'Attachments' | translate }}</h5>
+        <ngx-dropzone class="dropzone_sec" (change)="onFileSelect($event)">
+          <div class="dz-wrapper dropzone dz-multiple">
+            <div class="dz-message">
+              <div class="dz-text">{{ 'Click_or_drag_files_to_upload' | translate }}</div>
+            </div>
+            <div>
+              <div class="mb-3">
+                <img *ngIf="imageSrc" [src]="imageSrc" width="100px" height="100px">
+                <mat-icon *ngIf="imageSrc" class="del-ico" (click)="removeFile($event)">delete</mat-icon>
+              </div>
+            </div>
+          </div>
+        </ngx-dropzone>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 gap-2 hstack text-end">
+    <button type="submit" (click)="onSubmit()" class="btn btn-info w-sm">{{ 'Submit' | translate }}</button>
+  </div>
+</form>

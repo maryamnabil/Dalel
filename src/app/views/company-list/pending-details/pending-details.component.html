@@ -1,0 +1,19 @@
+<div class="user-card bg-dark page-content mb-4">
+  <app-backward
+    linkText="{{ 'COMPANY_DETAILS' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+  <app-company-details [companyDetails]="companyDetails"></app-company-details>
+  <div class="action-buttons d-flex flex-wrap gap-3 mt-5">
+    <button (click)="onApprove()" style="width: 180px" class="btn btn-primary">
+      {{ "APPROVE" | translate }}
+    </button>
+    <button
+      (click)="onDecline()"
+      style="width: 180px"
+      class="btn btn-outline btn-outline-primary"
+    >
+      {{ "DECLINE" | translate }}
+    </button>
+  </div>
+</div>

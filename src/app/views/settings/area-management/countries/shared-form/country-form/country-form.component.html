@@ -1,0 +1,48 @@
+<!-- promo-form.component.html -->
+<div [formGroup]="countryForm">
+  <!-- Name -->
+  <div class="row">
+    <div class="col-5 mb-5 form-group">
+      <label for="promoCode" class="form-label"
+        >{{ "COUNTRY_NAME_EN" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        placeholder="{{ 'COUNTRY_NAME_EN' | translate }}"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="formSubmitted && countryForm.get('name')?.hasError('required')"
+      >
+        {{ "TITLE_EN_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Name Ar -->
+  <div class="row">
+    <div class="col-5 mb-5 form-group">
+      <label for="nameAr" class="form-label"
+        >{{ "COUNTRY_NAME_AR" | translate }} *</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="nameAr"
+        formControlName="nameAr"
+        placeholder="{{ 'COUNTRY_NAME_AR' | translate }}"
+        required
+      />
+      <div
+        class="error-messages"
+        *ngIf="formSubmitted && countryForm.get('nameAr')?.hasError('required')"
+      >
+        {{ "TITLE_AR_REQUIRED" | translate }}
+      </div>
+    </div>
+  </div>
+</div>

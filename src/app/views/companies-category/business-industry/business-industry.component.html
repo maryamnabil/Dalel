@@ -1,0 +1,111 @@
+<app-table-filters
+  pageTitle="{{ 'BUSINESS_INDUSTRY_CATEGORY' | translate }}"
+  buttonText="{{ 'NEW_BUSINESS_INDUSTRY' | translate }}"
+  [buttonLink]="'/admin/business-industry/add'"
+  [showAdditionalButton]="true"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="nameEn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "BUSINESS_INDUSTRY_CATEGORY_IN_ENGLISH" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="link">
+        {{ element.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameAr">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "BUSINESS_INDUSTRY_CATEGORY_IN_ARABIC" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="link">
+        {{ element.nameAr }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="photo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "CATEGORY_PHOTO" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="link">
+        <ng-container
+          *ngIf="element?.photoPath | secureUrl | async as imageTemplateUrl"
+        >
+          <a [href]="imageTemplateUrl" target="_blank">
+            <img width="34px" height="34px" [src]="imageTemplateUrl" alt="" />
+          </a>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+      >
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="['/admin/sub-business-industry']"
+              [queryParams]="{ id: element.id }"
+            >
+              {{ "VIEW_DETAILS" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="['/admin/business-industry/edit', element.id]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="delete(element.id)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<!-- Pagination -->
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  ></mat-paginator>
+</div>

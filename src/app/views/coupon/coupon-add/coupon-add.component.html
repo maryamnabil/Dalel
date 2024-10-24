@@ -1,0 +1,11 @@
+<div class="page-content">
+    <app-backward linkText="{{ 'ADD_PROMO_TITLE' | translate }}" backwardLink="admin/coupon/coupons"></app-backward>
+  
+    <div class="form-content">
+      <form [formGroup]="promoForm">
+        <app-coupon-form [promoForm]="promoForm" [formSubmitted]="formSubmitted"></app-coupon-form>
+      </form>
+    </div>
+  
+    <app-form-actions buttonPrimaryText="{{ 'CREATE_PROMO' | translate }}" (submitForm)="submitForm()" (cancel)="cancel()"></app-form-actions>
+  </div>

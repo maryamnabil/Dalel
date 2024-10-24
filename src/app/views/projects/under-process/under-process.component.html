@@ -1,0 +1,54 @@
+<div style="max-width: 30%; width: 100%; min-height: 140px">
+  <app-title-status-card
+    [title]="'UNDER_PROCESS_PROJECTS'"
+    [number]="responseData?.pagination?.totalRecords"
+  >
+    <ng-container [ngTemplateOutlet]="icon"></ng-container>
+  </app-title-status-card>
+</div>
+
+<app-table-filters
+  pageTitle="{{ 'UNDER_PROCESS_PROJECTS' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="true"
+  [viewDetailsUrl]="'/admin/projects/details'"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>
+
+<ng-template #icon>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="4" fill="#383A2D" />
+    <path
+      d="M27.24 13H20.76C17 13 16.71 16.38 18.74 18.22L29.26 27.78C31.29 29.62 31 33 27.24 33H20.76C17 33 16.71 29.62 18.74 27.78L29.26 18.22C31.29 16.38 31 13 27.24 13Z"
+      stroke="#A3AE66"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</ng-template>

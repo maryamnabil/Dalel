@@ -1,0 +1,14 @@
+<h5 class="fs-14 mb-2">{{ title | translate }}</h5>
+<ngx-dropzone class="dropzone_sec" (change)="onFileSelect($event)">
+    <div class="dz-wrapper dropzone dz-multiple">
+        <div class="dz-message">
+            <div class="dz-text">{{ 'Click_or_drag_files_to_upload' | translate }}</div>
+        </div>
+        <div>
+            <div class="mb-3">
+                <img *ngIf="imageSrc" [src]="imageSrc" width="100px" height="100px">
+                <mat-icon *ngIf="imageSrc" class="del-ico" (click)="removeFile($event)">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+</ngx-dropzone>

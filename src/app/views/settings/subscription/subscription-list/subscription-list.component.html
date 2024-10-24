@@ -1,0 +1,91 @@
+<app-table-filters
+  pageTitle="{{ 'SUBSCRIPTION_PACKAGE' | translate }}"
+  [showSearchFiltre]="false"
+  [showDateFilter]="false"
+  buttonLink="/admin/settings/subscription/subscription-add"
+  [showAdditionalButton]="false"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "NAME" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element?.name }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="NameAr">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "NAME_AR" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element?.nameAr }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "PRICE" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.price }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ValidDays">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ "NUMBER_OF_VALID_DAYS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.numberOfValidDays }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+      >
+        {{ "ACTIONS" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="[
+                '/admin/settings/subscription/subscription-edit',
+                {
+                  price: element.price,
+                  nameAr: element.nameAr,
+                  name: element.name,
+                  numberOfValidDays: element.numberOfValidDays
+                }
+              ]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+            <!-- <button mat-menu-item class="menu-link danger-text" (click)="deleteClamSubject(element.ClamSubjectId)">{{ 'DELETE' | translate }}</button> -->
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="dataSource.paginator?.length"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+</div>

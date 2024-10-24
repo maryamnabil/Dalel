@@ -1,0 +1,48 @@
+<app-table-filters
+  pageTitle="{{ 'APPROVED_COMPANIES' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<!-- Block COLUMN -->
+<ng-template #blockTemplate let-element>
+  <a (click)="onBlock(element)" class="btn btn-danger">{{
+    "BLOCK" | translate
+  }}</a>
+</ng-template>
+
+<!-- CR CERTIFICATE COLUMN -->
+<ng-template #crCertificateTemplate let-element>
+  <div class="d-flex flex-column gap-1">
+    <a
+      class="text-primary text-underline"
+      [href]="element?.cr?.photo | secureUrl | async"
+      target="_blank"
+      >{{ "CERTIFICATE" | translate }}</a
+    >
+    <span class="date" style="font-size: 10px">
+      {{ "EXPIRES_AT" | translate }}
+      {{ element?.cr?.expiredDate | date }}
+    </span>
+  </div>
+</ng-template>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [viewDetailsUrl]="'/admin/company-list/approved-details'"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>

@@ -1,0 +1,22 @@
+<div class="page-content">
+  <app-backward
+    linkText="{{ 'Add_Question' | translate }}"
+    backwardLink="/admin/settings/questionaire"
+  ></app-backward>
+
+  <div class="form-content">
+    <form [formGroup]="questionForm">
+      <app-question-form
+        (updateForm)="updateForm($event)"
+        [questionForm]="questionForm"
+        [formSubmitted]="formSubmitted"
+      ></app-question-form>
+    </form>
+  </div>
+
+  <app-form-actions
+    buttonPrimaryText="{{ 'Add_Question' | translate }}"
+    (submitForm)="submitForm()"
+    (cancel)="cancel()"
+  ></app-form-actions>
+</div>

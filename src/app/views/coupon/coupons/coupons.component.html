@@ -1,0 +1,141 @@
+<div class="smaller-height">
+  <app-get-promos-useage-count></app-get-promos-useage-count>
+</div>
+<app-table-filters
+  pageTitle="{{ 'PROMO_TITLE' | translate }}"
+  (SearchChanged)="onSearchChanged($event)"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+  buttonText="{{ 'ADD_NEW_PROMO' | translate }}"
+  buttonLink="/admin/coupon/coupon-add"
+  [showAdditionalButton]="true"
+></app-table-filters>
+
+<div class="table-container">
+  <mat-table [dataSource]="dataSource" matSort>
+    <!-- Promo ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "PROMO_ID" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+    </ng-container>
+
+    <!-- Promo Code Column -->
+    <ng-container matColumnDef="promoCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "PROMO_CODE" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.promoCode }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid From Column -->
+    <ng-container matColumnDef="validFrom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "VALID_FROM" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.validFrom }}</mat-cell>
+    </ng-container>
+
+    <!-- Valid To Column -->
+    <ng-container matColumnDef="validTo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "VALID_TO" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.validTo }}</mat-cell>
+    </ng-container>
+
+    <!-- Discount Percentage Column -->
+    <ng-container matColumnDef="discountPercentage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "DISCOUNT_PERCENTAGE" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.discountPercentage
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Is Active Column -->
+    <ng-container matColumnDef="isActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+        "IS_ACTIVE" | translate
+      }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div
+          [ngClass]="{
+            'text-success': element.isActive,
+            'text-danger': !element.isActive
+          }"
+        >
+          {{
+            element.isActive ? ("ACTIVE" | translate) : ("INACTIVE" | translate)
+          }}
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="d-flex justify-content-end"
+        >{{ "ACTIONS" | translate }}</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" class="d-flex justify-content-end">
+        <div class="actions-menu">
+          <div class="actions-menu-btn" [matMenuTriggerFor]="menu">
+            <mat-icon
+              aria-hidden="false"
+              aria-label="more icon"
+              fontIcon="more_vert"
+            ></mat-icon>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              class="menu-link"
+              [routerLink]="['/admin/coupon/coupon-edit', element.id]"
+            >
+              {{ "EDIT" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link danger-text"
+              (click)="deleteCoupon(element.id)"
+            >
+              {{ "DELETE" | translate }}
+            </button>
+            <button
+              mat-menu-item
+              class="menu-link text-success"
+              (click)="ChangeStatus(element.id)"
+            >
+              {{ "CHANGE_STATUS" | translate }}
+            </button>
+          </mat-menu>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+
+<div class="table-pagination">
+  <mat-paginator
+    [showFirstLastButtons]="true"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    [length]="totalRecords"
+    (page)="onPageChanged($event)"
+  >
+    ></mat-paginator
+  >
+</div>

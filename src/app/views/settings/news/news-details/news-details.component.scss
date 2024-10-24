@@ -1,0 +1,62 @@
+@import "../../../../../assets//variables.scss";
+
+.card-info {
+  display: flex;
+  align-items: start;
+  background-color: $bg-light;
+  padding: 2rem;
+  border-radius: 15px;
+  .user-avatar {
+    align-self: flex-start;
+    img {
+      @include border-radius(100%);
+      width: 65px;
+      height: 65px;
+    }
+  }
+}
+
+.info-text {
+  color: $blue_dark;
+  font-size: $font-lg;
+  text-decoration: underline;
+}
+
+label {
+  color: $text-grey;
+  font-size: $font-lg;
+  text-transform: capitalize;
+}
+
+a.link {
+  font-size: $font-xl;
+  color: #fff;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.file-name {
+  font-size: $font-md;
+  vertical-align: middle;
+}
+
+.links {
+  .text {
+    font-size: $font-lg;
+  }
+}
+
+.info-area {
+  background-color: #282b2e;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.max-3-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

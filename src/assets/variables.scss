@@ -1,0 +1,84 @@
+// -----------------------------------------------------------------------------
+// This file contains all application Sass variables.
+// -----------------------------------------------------------------------------
+/* Colors */
+$primary: #9747ff; // CTA & Links
+:root {
+  --primary: #9747ff;
+}
+$secondary: #7336cc; // Secondary Buttons
+$white: #fff;
+$black: #000;
+$dark: #343b42;
+
+$blue: #35c2fd;
+$blue_dark: #6e97e8;
+$green: #14ba6d;
+$orange: #fd9535;
+$red: #df493f;
+$yellow: #b8b220;
+$cyan: #22e1b3;
+
+$grey-default: #ced4da;
+$text-grey: #7c7c7c;
+$text-grey-light: #646d7e;
+$border-grey: #dddddd;
+$placeholder-grey: #9ca3af;
+
+$bg-light: #212529; // Cards
+$bg-dark: #1e2126; // sidebar & Header
+$bg-darker: #1b1e23; // main background
+
+// #A3AED0 Charts
+// #49525B Search
+
+/* fonts */
+$font-light: 300;
+$font-reg: 400;
+$font-med: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-extra-bold: 900;
+
+$font-xxl: 28px;
+$font-xl: 16px;
+$font-lg: 14px;
+$font-md: 12px;
+$font-sm: 10px;
+
+$body-font: "Montserrat", "Helvetica Neue", sans-serif;
+$body-font-secondary: "Rubik", "Helvetica Neue", sans-serif;
+$body-font-ar: "Almarai", "Helvetica Neue", sans-serif;
+
+$body-background: $bg-darker;
+$body-color: $grey-default;
+$body-size: $font-md;
+$body-weight: $font-med;
+
+/* Responsive */
+$break-xl: 1200px;
+$break-lg: 991px;
+$break-md: 767px;
+$break-sm: 576px;
+
+$spacing: 16px;
+
+/* Mixin */
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -moz-box-shadow: inset $top $left $blur $color;
+    -webkit-box-shadow: inset $top $left $blur $color;
+    box-shadow: inset $top $left $blur $color;
+  } @else {
+    -moz-box-shadow: $top $left $blur $color;
+    -webkit-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin border-radius($radius) {
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}

@@ -1,0 +1,291 @@
+<div class="user-card bg-dark page-content mb-4">
+  <app-backward
+    linkText="{{ 'OPEN_CONTACTS_DETAILS' | translate }}"
+    [backwardLink]="backUrl"
+  ></app-backward>
+  <div class="card-info d-block mb-4">
+    <div class="info-header d-flex align-items-center gap-4">
+      <div class="user-avatar">
+        <img
+          alt="{{ 'Fatima Abdelaziz Mohamed' | translate }}"
+          [src]="details?.company_Image | secureUrl | async"
+          width="115"
+          height="115"
+        />
+      </div>
+      <div class="user-info w-100">
+        <div class="row gap-3 gap-md-0">
+          <div class="col-12 col-lg-4">
+            <div>
+              <div class="row align-items-center mb-3">
+                <div class="col-5">
+                  <label>{{ "COMPANY_NAME_CLIENT" | translate }}:</label>
+                </div>
+                <div class="col-7">
+                  <span class="info-text">{{ details?.company_Name }}</span>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-5">
+                  <label>{{ "BUSINESS_INDUSTRY" | translate }}:</label>
+                </div>
+                <div class="col-7">
+                  <span class="text-white">{{
+                    details?.businessIndustry
+                  }}</span>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-5">
+                  <label>{{ "INDUSTRY_CATEGORY" | translate }}:</label>
+                </div>
+                <div class="col-7">
+                  <span class="text-white">{{
+                    details?.category | localizedName | async
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="w-100 h-100 d-flex">
+              <div class="divider"></div>
+              <div class="ms-3 w-100">
+                <div class="row align-items-center mb-3">
+                  <div class="col-7">
+                    <label>{{ "PROJECT_ID" | translate }}:</label>
+                  </div>
+                  <div class="col-5">
+                    <span class="text-white">{{ details?.id }}</span>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                  <div class="col-7">
+                    <label>{{ "PROJECT_TITLE_IN_ENGLISH" | translate }}:</label>
+                  </div>
+                  <div class="col-5">
+                    <span class="text-white">{{ details?.project_Name }}</span>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                  <div class="col-7">
+                    <label>{{ "PROJECT_TITLE_IN_ARABIC" | translate }}:</label>
+                  </div>
+                  <div class="col-5">
+                    <span class="text-white">{{
+                      details?.project_NameAr
+                    }}</span>
+                  </div>
+                </div>
+                <div class="row align-items-center mb-3">
+                  <div class="col-7">
+                    <div class="d-flex align-items-center">
+                      <label
+                        >{{ "ESTIMATED_PROJECT_DURATION" | translate }}:</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <span class="text-white">{{
+                      details?.project_EstimatedDuration
+                    }}</span>
+                  </div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col-7">
+                    <div class="d-flex align-items-center">
+                      <label
+                        >{{ "ESTIMATED_PROJECT_BUDGET" | translate }}:</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <ng-container>
+                      <span class="text-white"
+                        >{{ details?.project_EstimatedPrice }}
+                        {{ "SR" | translate }}
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="w-100 h-100 d-flex">
+              <div class="divider"></div>
+              <div class="ms-3 w-100">
+                <div
+                  class="company-name-vendor d-flex align-items-center gap-3"
+                >
+                  <div class="user-avatar">
+                    <img
+                      alt="{{ 'Fatima Abdelaziz Mohamed' | translate }}"
+                      [src]="details?.vendor_Image | secureUrl | async"
+                      width="115"
+                      height="115"
+                    />
+                  </div>
+                  <div class="d-flex flex-column gap-2">
+                    <label>{{ "COMPANY_NAME_VENDOR" | translate }}:</label>
+                    <ng-container *ngIf="details?.vendor_Name; else noVendor">
+                      <a target="_blank">{{ details?.vendor_Name }}</a>
+                    </ng-container>
+                    <ng-template #noVendor>
+                      <p class="mt-3">
+                        {{ "NOT_ASSIGNED_YET" | translate }}
+                      </p>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attachments Part -->
+  <div class="card-info d-block mb-4">
+    <h6 class="mb-5">{{ "ATTACHMENT_FILES" | translate }}</h6>
+    <div
+      style="max-width: 400px; width: 100%"
+      class="attachments fs-6 d-flex flex-wrap align-items-center gap-5"
+    >
+      <a
+        *ngFor="let attachment of details?.attachments"
+        [href]="attachment?.path | secureUrl | async"
+        class="attachment-item d-block text-white d-flex gap-3 align-items-center text-decoration-none"
+        target="_blank"
+      >
+        <i class="fas fa-file"></i>
+        <span>{{ getFileName(attachment?.path) }}</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Payment Terms -->
+  <div class="payment-terms mb-4">
+    <div class="mb-2">
+      <app-table-filters
+        pageTitle="{{ 'PAYMENT_TERMS' | translate }}"
+        [showDateFilter]="false"
+        [showSearchFiltre]="false"
+        [showAdditionalButton]="false"
+        [showExportBtn]="false"
+      >
+      </app-table-filters>
+    </div>
+
+    <!-- Status Column -->
+    <ng-template #statusColumn let-element>
+      <div
+        class="status"
+        [ngClass]="element.isPaid ? 'active-status' : 'inactive-status'"
+      >
+        {{ (element.isPaid ? "PAID" : "NOT_PAID") | translate }}
+      </div>
+    </ng-template>
+
+    <app-table
+      [tableConfig]="paymentTermsTableConfig"
+      [responseData]="details?.paymentTerms"
+      [showEdit]="false"
+      [showDelete]="false"
+      [showActions]="false"
+      [showPagination]="false"
+    >
+    </app-table>
+  </div>
+
+  <!-- Project details -->
+  <div class="project-details mb-4">
+    <div class="required-skills mb-4">
+      <h6 class="mb-2">{{ "REQUIRED_SKILLS" | translate }}</h6>
+      <div class="info-area d-flex align-items-center bg-grey">
+        <span *ngFor="let skill of details?.skills; let last = last"
+          >{{ skill | localizedName | async }}
+          <span *ngIf="!last">-</span></span
+        >
+      </div>
+    </div>
+    <div class="description-en mb-4">
+      <h6 class="mb-2">{{ "PROJECT_DESCRIPTION_IN_ENGLISH" | translate }}</h6>
+      <div class="info-area bg-grey">
+        {{ details?.project_Description }}
+      </div>
+    </div>
+    <div class="description-ar">
+      <h6 class="mb-2">{{ "PROJECT_DESCRIPTION_IN_ARABIC" | translate }}</h6>
+      <div dir="rtl" class="info-area bg-grey">
+        {{ details?.project_DescriptionAr }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat History -->
+  <div
+    class="page-content d-flex flex-wrap justify-content-between align-items-center mb-4"
+  >
+    <h6 class="mb-0">{{ "CHAT_HISTORY" | translate }}:</h6>
+    <button (click)="onOpenChat()" class="btn btn-dark">
+      {{ "VIEW" | translate }}
+    </button>
+  </div>
+  <!-- Payment History -->
+  <div class="payment-terms mb-4">
+    <div class="mb-2">
+      <app-table-filters
+        pageTitle="{{ 'PAYMENT_HISTORY' | translate }}"
+        [showDateFilter]="false"
+        [showSearchFiltre]="false"
+        [showAdditionalButton]="false"
+        [showExportBtn]="false"
+      >
+      </app-table-filters>
+    </div>
+
+    <!-- Payd By Client Column -->
+    <ng-template #paidByClientColumn let-element>
+      <span
+        class="status"
+        [ngClass]="
+          element.transaction_ByClientStatus
+            ? 'active-status'
+            : 'inactive-status'
+        "
+        >{{
+          (element.transaction_ByClientStatus ? "PAID" : "NOT_PAID") | translate
+        }}</span
+      >
+    </ng-template>
+
+    <!-- Payd By Admin Column -->
+    <ng-template #paidByAdminColumn let-element>
+      <span
+        class="status"
+        [ngClass]="
+          element.transaction_ByAdminStatus
+            ? 'active-status'
+            : 'inactive-status'
+        "
+        >{{
+          (element.transaction_ByAdminStatus ? "PAID" : "NOT_PAID") | translate
+        }}</span
+      >
+    </ng-template>
+
+    <app-table
+      [tableConfig]="paymentHistoryTableConfig"
+      [responseData]="paymentHistoryResponseData"
+      [pageSize]="paymentHistoryPageSize"
+      [showEdit]="false"
+      [showDelete]="false"
+      [showActions]="false"
+      [viewDetailsUrl]="'TODO'"
+      (onPageChangeEvt)="onPaymentHistoryPageChanged($event)"
+    >
+    </app-table>
+  </div>
+</div>

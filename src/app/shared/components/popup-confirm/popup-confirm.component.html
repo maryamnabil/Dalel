@@ -1,0 +1,39 @@
+<div class="popup text-center">
+  <mat-dialog-content class="p-0">
+    <div class="d-flex justify-content-center">
+      <svg
+        *ngIf="showIcon"
+        width="106"
+        height="106"
+        viewBox="0 0 106 106"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M54.3012 56.3681C53.8352 56.4628 53.5004 56.8726 53.5004 57.3481V59.4992C53.5004 60.3276 52.8288 60.9992 52.0004 60.9992C51.1719 60.9992 50.5004 60.3276 50.5004 59.4992V55.1772C50.5004 54.3893 51.1099 53.7357 51.8958 53.6808C53.6732 53.5567 56.2883 52.952 58.4101 51.598C60.4813 50.2763 62.0003 48.3129 62.0003 45.3441C62.0003 42.4837 60.9392 40.5013 59.3985 39.1866C57.8198 37.8394 55.624 37.1016 53.2666 37.0092C48.3849 36.8178 43.8354 39.319 42.9642 43.2131C42.7833 44.0215 41.9813 44.5303 41.1729 44.3494C40.3644 44.1685 39.8557 43.3665 40.0365 42.5581C40.702 39.5839 42.6235 37.4069 45.1099 35.9819C47.6095 34.5492 50.6417 33.904 53.3841 34.0115C56.2526 34.124 59.1439 35.0255 61.3459 36.9045C63.5861 38.8162 65.0003 41.648 65.0003 45.3441C65.0003 49.5822 62.7297 52.4003 60.0239 54.127C58.1925 55.2957 56.1239 55.9977 54.3012 56.3681ZM49.5003 68.4992C49.5003 66.8424 50.8435 65.4992 52.5003 65.4992C54.1572 65.4992 55.5003 66.8424 55.5003 68.4992C55.5003 70.1561 54.1572 71.4992 52.5003 71.4992C50.8435 71.4992 49.5003 70.1561 49.5003 68.4992Z"
+          fill="#87ADBD"
+          stroke="#87ADBD"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <circle cx="53" cy="53" r="50.5" stroke="#87ADBD" stroke-width="5" />
+      </svg>
+    </div>
+
+    <strong *ngIf="data.title" class="text-danger mt-2">{{
+      translatePopup(data.title)
+    }}</strong>
+    <p class="my-3 fw-bold my-5 fs-6">
+      {{ translatePopup(data.message) }}
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="justify-content-center p-0">
+    <button class="btn btn-success" (click)="onConfirmClick()">
+      {{ translatePopup(data.confirmButton) }}
+    </button>
+    <button class="btn btn-danger" (click)="onCancelClick()">
+      {{ translatePopup(data.cancelButton) }}
+    </button>
+  </mat-dialog-actions>
+</div>

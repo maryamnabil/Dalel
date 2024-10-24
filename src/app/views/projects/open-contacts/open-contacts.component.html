@@ -1,0 +1,61 @@
+<div style="max-width: 30%; width: 100%; min-height: 140px">
+  <app-title-status-card
+    [title]="'OPEN_CONTACTS'"
+    [number]="responseData?.pagination?.totalRecords"
+  >
+    <ng-container [ngTemplateOutlet]="icon"></ng-container>
+  </app-title-status-card>
+</div>
+
+<app-table-filters
+  pageTitle="{{ 'OPEN_CONTACTS' | translate }}"
+  [showDateFilter]="true"
+  (SearchChanged)="onSearchChanged($event)"
+  [showAdditionalButton]="false"
+  [showExportBtn]="true"
+  (dateRangeChanged)="
+    onDateRangeFilterApplied({
+      fromDate: $event.startDate,
+      toDate: $event.endDate
+    })
+  "
+>
+</app-table-filters>
+
+<app-table
+  [tableConfig]="tableConfig"
+  [responseData]="responseData"
+  [pageSize]="pageSize"
+  [showEdit]="false"
+  [showDelete]="false"
+  [showActions]="true"
+  [viewDetailsUrl]="'/admin/projects/details'"
+  (onPageChangeEvt)="onPageChanged($event)"
+>
+</app-table>
+
+<ng-template #icon>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="4" fill="#32CD70" fill-opacity="0.2" />
+    <path
+      d="M24 34C29.5 34 34 29.5 34 24C34 18.5 29.5 14 24 14C18.5 14 14 18.5 14 24C14 29.5 18.5 34 24 34Z"
+      stroke="#32CD70"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M19.75 23.9999L22.58 26.8299L28.25 21.1699"
+      stroke="#32CD70"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</ng-template>

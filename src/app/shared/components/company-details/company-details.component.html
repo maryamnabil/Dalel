@@ -1,0 +1,299 @@
+<div class="card-info d-block">
+  <div class="info-header d-flex align-items-center gap-4 mb-5">
+    <div class="user-avatar">
+      <img
+        alt="Fatima Abdelaziz Mohamed"
+        src="/assets/images/dummy-user.jpg"
+        width="115"
+        height="115"
+      />
+    </div>
+    <div class="user-info w-100">
+      <div class="row gap-3 gap-md-0">
+        <div class="col-12 col-lg-4">
+          <div>
+            <div class="row align-items-center mb-3">
+              <div class="col-5">
+                <label>{{ "COMPANT_NAME_CLIENT" | translate }}:</label>
+              </div>
+              <div class="col-7">
+                <span class="info-text">{{ companyDetails?.fullName }}</span>
+              </div>
+            </div>
+            <div class="row align-items-center mb-3">
+              <div class="col-5">
+                <label>{{ "COMPANY_MOBILE_NUMBER" | translate }}:</label>
+              </div>
+              <div class="col-7">
+                <span class="text-white">{{
+                  companyDetails?.mobileNumber
+                }}</span>
+              </div>
+            </div>
+            <div class="row align-items-center mb-3">
+              <div class="col-5">
+                <label>{{ "COMPANT_TELEPHONE_NUMBER" | translate }}:</label>
+              </div>
+              <div class="col-7">
+                <span class="text-white">{{
+                  companyDetails?.phoneNumber
+                }}</span>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-5">
+                <label>{{ "EMAIL_ADDRESS" | translate }}:</label>
+              </div>
+              <div class="col-7">
+                <span class="text-underline text-white fw-bold">{{
+                  companyDetails?.email
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="w-100 h-100 d-flex">
+            <div class="divider"></div>
+            <div class="ms-3 w-100">
+              <div class="row align-items-center mb-3">
+                <div class="col-7">
+                  <label>{{ "BUSINESS_INDUSTRY" | translate }}:</label>
+                </div>
+                <div class="col-5">
+                  <span class="text-white">{{
+                    companyDetails?.businessIndustry
+                  }}</span>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-7">
+                  <label>{{ "NO_OF_EMPLOYEES" | translate }}:</label>
+                </div>
+                <div class="col-5">
+                  <span class="text-white">{{
+                    companyDetails?.noOfEmployees
+                  }}</span>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-7">
+                  <div class="d-flex align-items-center">
+                    <label>{{ "WORKING_HOURS" | translate }}:</label>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <span class="text-white"
+                    >{{
+                      (companyDetails?.workingDays === workingDays.FULLTIME
+                        ? "FULL_TIME"
+                        : "PART_TIME"
+                      ) | translate
+                    }}
+                    {{ companyDetails?.workingHours }}
+                    {{ "HOURS" | translate }}</span
+                  >
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-7">
+                  <div class="d-flex align-items-center">
+                    <label>{{ "DAY_OFF" | translate }}:</label>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <ng-container
+                    *ngIf="
+                      companyDetails?.dayOffOpts &&
+                      companyDetails?.dayOffOpts?.length
+                    "
+                  >
+                    <span
+                      *ngFor="
+                        let item of companyDetails.dayOffOpts;
+                        let last = last
+                      "
+                      class="text-white"
+                      >{{ getWeekName(item) | translate }}
+                      <span *ngIf="!last">-</span>
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="w-100 h-100 d-flex">
+            <div class="divider"></div>
+            <div class="ms-3 w-100">
+              <div class="row align-items-center mb-3">
+                <div class="col-8">
+                  <label
+                    >{{ "COMPANY_REGISTRATION_NUMBER" | translate }}:</label
+                  >
+                </div>
+                <div class="col-4">
+                  <span class="text-white">{{
+                    companyDetails?.cr?.number
+                  }}</span>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-8">
+                  <label>{{ "COMPANY_REGISTRATION_PHOTO" | translate }}:</label>
+                </div>
+                <div class="col-4">
+                  <a
+                    class="link"
+                    style="font-size: 12px; overflow-wrap: break-word"
+                    [href]="companyDetails?.cr?.photo | secureUrl | async"
+                    target="_blank"
+                  >
+                    <span class="text-primary text-underline">{{
+                      companyDetails?.cr?.photo
+                    }}</span>
+                  </a>
+                </div>
+              </div>
+              <div class="row align-items-center mb-3">
+                <div class="col-8">
+                  <div class="d-flex align-items-center">
+                    <label
+                      >{{
+                        "COMPANY_REGISTRATIONS_CR_EXPIRATION" | translate
+                      }}:</label
+                    >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <span class="text-white">{{
+                    companyDetails?.cr?.expiredDate | date : "MM/yyyy"
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <div class="page-content h-100">
+      <h6 class="text-white fw-bold mb-5">
+        {{ "COMPANY_ADDRESS" | translate }}:
+      </h6>
+      <div class="row align-items-center mb-4">
+        <div class="col-4">
+          <div class="d-flex gap-2">
+            <label>{{ "CITY" | translate }}:</label>
+            <span class="text-white">{{
+              companyDetails?.address?.city | localizedName | async
+            }}</span>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="d-flex gap-2">
+            <label>{{ "COUNTRY" | translate }}:</label>
+            <span class="text-white">{{
+              companyDetails?.address?.country | localizedName | async
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center mb-4">
+        <div class="col-4">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fas fa-map-marker-alt align-middle"></i>
+            <label style="line-height: 1em" class="align-middle"
+              >{{ "ADDRESS" | translate }}:</label
+            >
+          </div>
+        </div>
+        <div class="col-8">
+          <span class="text-white">{{
+            companyDetails?.address?.fullAddress
+          }}</span>
+        </div>
+      </div>
+      <div
+        *ngIf="
+          companyDetails?.address?.latitude &&
+          companyDetails?.address?.longitude
+        "
+        class="row align-items-center"
+      >
+        <div class="col-4">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fas fa-map-marker-alt align-middle"></i>
+            <label style="line-height: 1em" class="align-middle"
+              >{{ "MAP_LOCATION" | translate }}:</label
+            >
+          </div>
+        </div>
+        <div class="col-8">
+          <a
+            [href]="
+              getMapLink(
+                companyDetails?.address?.latitude,
+                companyDetails?.address?.longitude
+              )
+            "
+            target="_blank"
+          >
+            <span class="text-primary text-underline">{{
+              "VIEW_MAP" | translate
+            }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-12"
+    [ngClass]="{ 'col-lg-6': !isApproved, 'col-lg-4': isApproved }"
+  >
+    <div class="page-content h-100">
+      <h6 class="text-white fw-bold mb-5">
+        {{ "SOCIAL_MEDIA_LINKS" | translate }}:
+      </h6>
+      <div class="links d-flex flex-column gap-3">
+        <div
+          *ngFor="let item of companyDetails?.socialAccountStrs"
+          class="d-flex align-items-center gap-3 text-white"
+          style="font-size: 1rem"
+        >
+          <span class="icon">
+            <i
+              class="fab"
+              [ngClass]="{
+                'fa-facebook-f': item.socialKey === socialKey.Facebook,
+                'fa-instagram': item.socialKey === socialKey.Instagram,
+                'fa-twitter': item.socialKey === socialKey.Twitter,
+                'fa-linkedin-in': item.socialKey === socialKey.Linkedin
+              }"
+            ></i>
+          </span>
+          <span class="text">{{ item?.link }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isApproved" class="col-12 col-lg-2">
+    <div
+      class="page-content d-flex flex-column gap-4 justify-content-center h-100"
+    >
+      <span class="text-white">{{ "WALLET" | translate }}</span>
+      <div class="d-flex flex-wrap gap-2">
+        <label>{{ "CURRENT_BALANCE" | translate }}:</label>
+        <span class="text-white">{{ userWallet?.total }}</span>
+      </div>
+      <button (click)="onRecharge()" class="btn btn-primary">
+        {{ "RECHARGE_ACCOUNT" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

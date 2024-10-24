@@ -1,0 +1,63 @@
+<!-- promo-form.component.html -->
+<div [formGroup]="cityForm">
+  <div class="row">
+    <div class="col-5 mb-5 form-group">
+      <label for="promoCode" class="form-label"
+        >You Can Upload Excel here *</label
+      >
+      <input
+        (change)="onFileChange($event)"
+        class="form-control"
+        style="height: auto !important"
+        type="file"
+        id="formFile"
+      />
+    </div>
+  </div>
+
+  <div formArrayName="cities">
+    <div
+      class="row"
+      *ngFor="let city of cities().controls; let i = index"
+      [formGroupName]="i"
+    >
+      <!-- Name -->
+      <div class="col-4 mb-5 form-group">
+        <label for="promoCode" class="form-label"
+          >{{ "CITY_NAME_EN" | translate }} *</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          formControlName="name"
+          placeholder="{{ 'CITY_NAME_EN' | translate }}"
+          required
+        />
+      </div>
+
+      <!-- Name Ar -->
+      <div class="col-4 mb-5 form-group">
+        <label for="nameAr" class="form-label"
+          >{{ "CITY_NAME_AR" | translate }} *</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="nameAr"
+          formControlName="nameAr"
+          placeholder="{{ 'CITY_NAME_AR' | translate }}"
+          required
+        />
+      </div>
+      <div class="col-4 d-flex btn-div">
+        <button (click)="removeCity(i)" class="btn btn-danger">
+          {{ "DELETE" | translate }}
+        </button>
+        <button type="button" (click)="addCity()" class="btn btn-primary">
+          {{ "ADD" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

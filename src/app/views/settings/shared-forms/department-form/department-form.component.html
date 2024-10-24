@@ -1,0 +1,21 @@
+<div [formGroup]="departmentForm">
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="departmentName" class="form-label">{{ 'DEPT_NAME_EN' | translate }} *</label>
+      <input type="text" class="form-control" id="departmentName" formControlName="departmentName" name="departmentName" placeholder="{{ 'DEPT_NAME_EN' | translate }}" required>
+      <div class="error-messages" *ngIf="formSubmitted && departmentForm.get('departmentName')?.hasError('required')">
+        {{'NAME_REQUIRED' | translate}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4 mb-5 form-group">
+      <label for="departmentNameAr" class="form-label">{{ 'DEPT_NAME_AR' | translate }} *</label>
+      <input type="text" class="form-control" id="departmentNameAr" formControlName="departmentNameAr" name="departmentNameAr" placeholder="{{ 'DEPT_NAME_AR' | translate }}" required>
+      <div class="error-messages" *ngIf="formSubmitted && departmentForm.get('departmentNameAr')?.hasError('required')">
+        {{'NAME_AR_REQUIRED' | translate}}
+      </div>
+    </div>
+  </div>
+</div>
